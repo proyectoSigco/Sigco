@@ -31,4 +31,8 @@ class FacadeOrdenCompra
         return $this->dao->listarOrdenes($this->con);
     }
 
+    public function cancelarOrden($user){
+        return $this->dao->cancelarOrden($user,$this->con);
+    }
+
 }

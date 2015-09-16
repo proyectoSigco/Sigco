@@ -21,14 +21,18 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
     <!-- Font Awesome Icons -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <!-- Ionicons -->
-    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+      <link href="../../plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+
+
+      <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
     <link href="../../dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect.
     -->
-    <link href="../../dist/css/skins/skin-blue.min.css" rel="stylesheet" type="text/css" />
+      <link href="../../plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+      <link href="../../dist/css/skins/skin-blue.min.css" rel="stylesheet" type="text/css" />
     <link href="../../dist/css/style.css" rel="stylesheet" type="text/css" />
 
     <!-- FORMVALIDATION -->
@@ -390,7 +394,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                                     <!-- /.box-header -->
                                     <div class="box-body">
                                         <p>
-                                            Se han encontrado <span class="badge label-info"><?php echo $conteo; ?></span>
+                                            Se han encontrado <span class="badge label-info"><?php echo $_SESSION['conteo']; ?></span>
                                             registros para esta consulta.
                                         </p>
                                         <br>
@@ -411,7 +415,6 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                                             <tbody>
                                             <?php
                                             $consulta = $_SESSION['consulta'];
-                                            $_SESSION['exportar'] = $consulta;
                                             foreach ($consulta as $respuesta){
                                             ?>
                                             <tr>
@@ -547,14 +550,16 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
     <script src="../../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/app.min.js" type="text/javascript"></script>
-
+    <script src="../../plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="../../plugins/datatables/dataTables.bootstrap.min.js" type="text/javascript"></script>
     <!-- Optionally, you can add Slimscroll and FastClick plugins.
           Both of these plugins are recommended to enhance the
           user experience. Slimscroll is required when using the
           fixed layout. -->
   </body>
+
   <script type="text/javascript">
-$(document).ready(function() {   
+$(document).ready(function() {
 
     function randomNumber(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
@@ -598,6 +603,20 @@ $(document).ready(function() {
 </script>
 
   <script type="text/javascript">
+      $(function () {
+          $("#example1").DataTable();
+          $('#example2').DataTable({
+              "paging": true,
+              "lengthChange": false,
+              "searching": false,
+              "ordering": true,
+              "info": true,
+              "autoWidth": false
+          });
+      });
+  </script>
+
+  <script type="text/javascript">
       $(document).ready(function (){
           $('.click').click(function () {
               $.post("../controllers/ClientesController.php",
@@ -625,19 +644,6 @@ $(document).ready(function() {
                       //alert(data);
                   });
 
-          });
-      });
-  </script>
-  <script type="text/javascript">
-      $(function () {
-          $("#example1").DataTable();
-          $('#example2').DataTable({
-              "paging": true,
-              "lengthChange": false,
-              "searching": false,
-              "ordering": true,
-              "info": true,
-              "autoWidth": false
           });
       });
   </script>

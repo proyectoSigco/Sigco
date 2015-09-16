@@ -16,14 +16,15 @@ class GestionDao {
 
 
         try {
-            $query = $cnn->prepare("INSERT INTO Gestiones (EstadoGestiones,TipoGestiones,Asunto,Asistentes,ObservacionesGestiones,LugarGestiones,FechaProgramada,NitClienteGestiones,CedulaEmpleadoGestiones)VALUES ('PENDIENTE',?,?,?,?,?,?,?,1022)");
+            $query = $cnn->prepare("CALL crearGestion (?,?,?,?,?,?,?,?)");
             $query->bindParam(1, $gestionDto->getTipoVisita());
             $query->bindParam(2, $gestionDto->getTemaProducto());
             $query->bindParam(3, $gestionDto->getAsistentes());
             $query->bindParam(4, $gestionDto->getObservaciones());
             $query->bindParam(5, $gestionDto->getLugar());
             $query->bindParam(6, $gestionDto->getFechaVisita());
-            $query->bindParam(7,$gestionDto->getIdCliente());
+            $query->bindParam(7, $gestionDto->getIdCliente());
+            $query->bindParam(8, $gestionDto->getIdUsuario());
             $query->execute();
             $this->mensaje="Visita Registrada";
         } catch (Exception $ex) {
@@ -36,18 +37,18 @@ class GestionDao {
     public function modificarGestion(GestionDto $gestionDto,PDO $cnn,$idGestion) {
 
      try {
-            $query = $cnn->prepare("UPDATE  Gestiones SET CedulaEmpleadoGestiones=1022,NitClienteGestiones=?,EstadoGestiones=?,Asunto=?,Asistentes=?,ObservacionesGestiones=?,LugarGestiones=?,FechaProgramada=?,TipoGestiones=? where IdGestion=?");
+            $query = $cnn->prepare("CALL modificarGestion (?,?,?,?,?,?,?,?,?,?)");
 
-            //$query->bindParam(1, $gestionDto->getIdUsuario());
-            $query->bindParam(1, $gestionDto->getIdCliente());
-            $query->bindParam(2, $gestionDto->getEstado());
-            $query->bindParam(3, $gestionDto->getTemaProducto());
-            $query->bindParam(4, $gestionDto->getAsistentes());
-            $query->bindParam(5, $gestionDto->getObservaciones());
-            $query->bindParam(6, $gestionDto->getLugar());
-            $query->bindParam(7, $gestionDto->getFechaVisita());
-            $query->bindParam(8,$gestionDto->getTipoVisita());
-            $query->bindParam(9, $idGestion);
+            $query->bindParam(1, $gestionDto->getIdUsuario());
+            $query->bindParam(2, $gestionDto->getIdCliente());
+            $query->bindParam(3, $gestionDto->getEstado());
+            $query->bindParam(4, $gestionDto->getTemaProducto());
+            $query->bindParam(5, $gestionDto->getAsistentes());
+            $query->bindParam(6, $gestionDto->getObservaciones());
+            $query->bindParam(7, $gestionDto->getLugar());
+            $query->bindParam(8, $gestionDto->getFechaVisita());
+            $query->bindParam(9,$gestionDto->getTipoVisita());
+            $query->bindParam(10, $idGestion);
             $query->execute();
             $this->mensaje = "Registro Actualizado";
         } catch (Exception $ex) {
@@ -57,19 +58,8 @@ class GestionDao {
         return $this->mensaje;
     }
 
-    public function obtenerGestion($idGestion,PDO $cnn) {
 
-        try {
-            $query = $cnn->prepare('SELECT Nombre FROM Gestiones WHERE IdGestion=?');
-            $query->bindParam(1, $idGestion);
-            $query->execute();
-            return $query->fetchall();
-        } catch (Exception $ex) {
-            echo 'Error' . $ex->getMessage();
-        }
-        $cnn=null;
-    }
-    public function cancelarGestion($idGestion,PDO $cnn) {
+  /*  public function cancelarGestion($idGestion,PDO $cnn) {
 
 
         try {
@@ -81,13 +71,15 @@ class GestionDao {
             $mensaje = $ex->getMessage();
         }
         return $this->mensaje;
-    }
-    public function listarGestion(PDO $cnn) {
+    }*/
+    public function listarGestion($idUsuario,PDO $cnn) {
 
     try {
-            $listarGesion = 'Select * from Gestiones';
-            $query = $cnn->prepare($listarGesion);
+
+            $query = $cnn->prepare("call listarGestion (?)");
+            $query->bindParam(1,$idUsuario);
             $query->execute();
+            $_SESSION['conteo']=$query->rowCount();
             return $query->fetchAll();
         } catch (Exception $ex) {
             echo 'Error' . $ex->getMessage();
@@ -97,8 +89,7 @@ class GestionDao {
     public function obtenerEmpresaById($criteria,PDO $cnn) {
 
         try {
-            $listarGesion = 'Select * from SIGCO.Clientes WHERE Nit=?';
-            $query = $cnn->prepare($listarGesion);
+            $query = $cnn->prepare("call obtenerEmpresaById (?)");
             $query->bindParam(1,$criteria);
             $query->execute();
             return $query->fetchall();
@@ -111,11 +102,9 @@ class GestionDao {
     public function obtenerEmpresas(PDO $cnn) {
 
         try {
-            $listarGesion = 'Select * from SIGCO.Clientes';
-            $query = $cnn->prepare($listarGesion);
+            $query = $cnn->prepare("call obtenerEmpresas");
             $query->execute();
             return $query->fetchall();
-
         } catch (Exception $ex) {
             $this->mensaje= $ex->getMessage();
         }
@@ -124,7 +113,7 @@ class GestionDao {
     public function completeGestion($idGestion,PDO $cnn) {
 
         try {
-            $query = $cnn->prepare('SELECT * FROM Gestiones WHERE IdGestion=?');
+            $query = $cnn->prepare("call completeGestion (?)");
             $query->bindParam(1, $idGestion);
             $query->execute();
             return $query->fetch();
@@ -135,8 +124,7 @@ class GestionDao {
     }
     public function buscarGestion($id,PDO $cnn){
         try{
-            $query = $cnn->prepare("Select * from Gestiones join Clientes on Clientes.Nit=Gestiones.NitClienteGestiones
-                                    where Gestiones.IdGestion=?");
+            $query = $cnn->prepare("call buscarGestion (?)");
             $query->bindParam(1,$id);
             $query->execute();
             return $query->fetch();
@@ -152,7 +140,9 @@ class GestionDao {
                     $query = $cnn->prepare("Select * from Gestiones JOIN Clientes on Clientes.Nit=Gestiones.NitClienteGestiones
                                             where $criterio='$busqueda' ");
                     $query->execute();
-                    $_SESSION['conteo'] = $query->rowCount();
+                    if(isset($_SESSION['conteo'])) {
+                        $_SESSION['conteo'] = $query->rowCount();
+                    }
                     return $query->fetchAll();
                 } catch (Exception $ex){
                     echo '&ex='.$ex->getMessage().'&encontrados=0';
@@ -164,7 +154,9 @@ class GestionDao {
                     $query = $cnn->prepare("Select * from Gestiones JOIN Clientes on Clientes.Nit=Gestiones.NitClienteGestiones
                                             where $criterio like '%$busqueda%' ");
                     $query->execute();
-                    $_SESSION['conteo'] = $query->rowCount();
+                    if(isset($_SESSION['conteo'])) {
+                        $_SESSION['conteo'] = $query->rowCount();
+                    }
                     return $query->fetchAll();
                 } catch (Exception $ex){
                     echo '&ex='.$ex->getMessage().'&encontrados=0';

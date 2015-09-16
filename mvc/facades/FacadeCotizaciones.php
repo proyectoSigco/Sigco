@@ -12,9 +12,12 @@ class FacadeCotizaciones
         $this->CotizacionDao=new CotizacionesDAO();
     }
 
+    public function agregarProducto(DetallesCotizacionDTO $dto){
+        return $this->CotizacionDao->agregarProducto($dto,$this->conexion);
+    }
 
-    public function registrarCotizaciones (CotizacionesDTO $cotizacionesDTO, DetallesCotizacionDTO $detallesCotizacionDTO){
-        return $this->CotizacionDao->registrarCotizaciones($cotizacionesDTO, $detallesCotizacionDTO, $this->conexion);
+    public function registrarCotizaciones (CotizacionesDTO $cotizacionesDTO){
+        return $this->CotizacionDao->registrarCotizaciones($cotizacionesDTO, $this->conexion);
     }
 
     public function listarCotizaciones (){
@@ -29,8 +32,10 @@ class FacadeCotizaciones
         return $this->CotizacionDao->buscarCotizacionCriterio($criterio,$busqueda,$comobuscar,$this->conexion);
     }
 
-    public function agregarProducto(DetallesCotizacionDTO $dto){
-        return $this->CotizacionDao->agregarproducto($dto,$this->conexion);
+    public function cancelarCoti($user){
+        return $this->CotizacionDao->cancelarCoti($user,$this->conexion);
+
     }
+
 
 }

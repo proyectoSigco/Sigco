@@ -1,13 +1,8 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: iStam
- * Date: 3/09/15
- * Time: 7:56 PM
- */
-require'../utilities/Conexion.php';
-require'../models/MetaUsuarioDao.php';
+
+include_once'../utilities/Conexion.php';
+include_once'../models/MetaUsuarioDao.php';
 class FacadeMetaUsuario
 {
     private $con;
@@ -23,4 +18,14 @@ class FacadeMetaUsuario
         return $this->objDao->asignarMeta($dto,$this->con);
     }
 
+    public function buscarConCriterio($criterio,$busqueda,$comobuscar){
+        return $this->objDao->buscarMetaCriterio($criterio,$busqueda,$comobuscar,$this->con);
+    }
+
+    public function listarMetas(){
+        return $this->objDao->listarMeta($this->con);
+    }
+    public function buscarMeta($user){
+        return $this->objDao->buscarMeta($user,$this->con);
+    }
 }

@@ -1,52 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+<head>
+    <meta charset="UTF-8">
+    <title>Exportar clientes</title>
+</head>
+<body>
 <?php
 session_start();
-  if (isset($_POST['exportar'])){
-      header("Content-type: application/vnd.ms-excel; name='excel'; charset=utf-8");
-      header("Content-Disposition: filename=ConsultaClientes-".$_GET['busqueda'].'-'.time().".xls");
-      header("Pragma: no-cache");
-      header("Expires: 0");
-      $consulta = $_SESSION['exportar'];
-      unset($_SESSION['exportar']);
-  }
+header("Content-type: application/vnd.ms-excel; name='excel'; charset=utf-8");
+header("Content-Disposition: filename=ConsultaClientes-".$_GET['busqueda'].'-'.time().".xls");
+header("Pragma: no-cache");
+header("Expires: 0");
+$consulta = $_SESSION['consulta'];
 ?>
 <table border="1">
-  <tr>
-  <td>Cédula</td>
-  <td>Nombres</td>
-  <td>Apellidos</td>
-  <td>Email personal</td>
-  <td>#Celular</td>
-  <td>#Nit</td>
-  <td>Razón social</td>
-  <td>Dirección empresa</td>
-  <td>Ubicación</td>
-  <td>Teléfono empresa</td>
-  <td>Email corporativo</td>
-  <td>Tipo de cliente</td>
-  <td>Actividad empresarial</td>
-  <td>Clasificación</td>
-  </tr>
-  <?php
-  foreach ($consulta as $respuesta){
-  ?>
-<tr>
-    <td><?php utf8_encode($respuesta['CedulaPersona']) ?></td>
-    <td><?php utf8_encode( $respuesta['Nombres']) ?></td>
-    <td><?php utf8_encode( $respuesta['Apellidos']) ?></td>
-    <td><?php utf8_encode( $respuesta['EmailPersona']) ?></td>
-    <td><?php utf8_encode( $respuesta['CelularPersona']) ?></td>
-    <td><?php utf8_encode( $respuesta['Nit']); ?></td>
-    <td><?php utf8_encode( $respuesta['RazonSocial']); ?></td>
-    <td><?php utf8_encode( $respuesta['Direccion']); ?></td>
-    <td><?php utf8_encode( $respuesta['NombreLugar']); ?></td>
-    <td><?php utf8_encode( $respuesta['Telefono']); ?></td>
-    <td><?php utf8_encode( $respuesta['EmailCliente']); ?></td>
-    <td><?php utf8_encode( $respuesta['NombreTipo']); ?></td>
-    <td><?php utf8_encode( $respuesta['NombreActividad']); ?></td>
-    <td><?php utf8_encode( $respuesta['NombreClasificacion']); ?></td>
-</tr>
+    <thead>
+    <th colspan="6"><b>INFORMACIÓN CORPORATIVA</b></th>
+    <th colspan="5"><b>INFORMACIÓN PERSONAL</b></th>
+    <th colspan="4"><b>CLASIFICACIÓN Y ESTADO</b></th>
+    <tr>
+        <td><b>#Nit</b></td>
+        <td><b>Razón social</b></td>
+        <td><b>Dirección empresa</b></td>
+        <td><b>Ubicación</b></td>
+        <td><b>Teléfono empresa</b></td>
+        <td><b>Email corporativo</b></td>
+        <td><b>Cédula</b></td>
+        <td><b>Nombres</b></td>
+        <td><b>Apellidos</b></td>
+        <td><b>Email personal</b></td>
+        <td><b>#Celular</b></td>
+        <td><b>Tipo de cliente</b></td>
+        <td><b>Actividad empresarial</b></td>
+        <td><b>Clasificación</b></td>
+        <td><b>Estado</b></td>
+    </tr>
+    </thead>
+    <tbody>
     <?php
+    $consulta = $_SESSION['consulta'];
+    foreach ($consulta as $respuesta){
+        ?>
+        <tr>
+            <td>
+                <?php echo $respuesta['Nit']; ?>
+            </td>
+            <td>
+                <?php echo $respuesta['RazonSocial']; ?>
+            </td>
+            <td>
+                <?php echo $respuesta['Direccion']; ?>
+            </td>
+            <td>
+                <?php echo $respuesta['NombreLugar']; ?>
+            </td>
+            <td>
+                <?php echo $respuesta['Telefono']; ?>
+            </td>
+            <td>
+                <?php echo $respuesta['EmailCliente']; ?>
+            </td>
+            <td>
+                <?php echo $respuesta['CedulaPersona']; ?>
+            </td>
+            <td>
+                <?php echo $respuesta['Nombres']; ?>
+            </td>
+            <td>
+                <?php echo $respuesta['Apellidos']; ?>
+            </td>
+            <td>
+                <?php echo $respuesta['EmailPersona']; ?>
+            </td>
+            <td>
+                <?php echo $respuesta['CelularPersona']; ?>
+            </td>
+            <td>
+                <?php echo $respuesta['NombreTipo']; ?>
+            </td>
+            <td>
+                <?php echo $respuesta['NombreActividad']; ?>
+            </td>
+            <td>
+                <?php echo $respuesta['NombreClasificacion']; ?>
+            </td>
+            <td>
+                <?php echo $respuesta['EstadoPersona']; ?>
+            </td>
+        </tr>
+        <?php
     }
     ?>
-
-
+    </tbody>
+</table>
+</body>
+</html>

@@ -18,7 +18,7 @@ if(isset($_GET['controlar'])) {
                 $_POST['IdTipo'], $_POST['IdActividad'], $_POST['IdLugar']
             );
 
-            $mensaje = $fachada->registrarCliente($clienteDto);
+            echo $mensaje = $fachada->registrarCliente($clienteDto);
 
             header("Location: ../views/buscarClientes.php?mensaje=" . $mensaje);
 

@@ -11,6 +11,8 @@ class ProductosDto {
     private  $valorUnitario;
     private  $imagenProducto;
 
+
+
     /**
      * @return mixed
      */

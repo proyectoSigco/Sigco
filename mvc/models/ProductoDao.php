@@ -63,7 +63,7 @@ class ProductoDao  {
 
     public function obtenerProducto($id,PDO $cnn){
         try {
-            $query = $cnn->prepare('select * from  Productos where IdProducto=?');
+            $query = $cnn->prepare('select * from  Productos join Impuestos on Impuestos.Idiva=Productos.IdIvaProductos where IdProducto=?');
             $query->bindParam(1,$id);
             $query->execute();
             return $query->fetch();

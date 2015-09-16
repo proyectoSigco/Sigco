@@ -6,6 +6,7 @@ $fachada = new FacadeEmpleado();
 $user=$_POST['email'];
 $pass=$_POST['clave'];
 $_SESSION['datosLogin']=$fachada->comprobarUsuario($user,$pass);
+print_r($_SESSION['datosLogin']);
 if ($_SESSION['datosLogin']==false){
     header('location: ../../index.php?login=false');
 }else{

@@ -9,11 +9,10 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
     header('location: Invalido.php');
 }
 ?>
-
 <html>
   <head>
     <meta charset="UTF-8">
-    <title> TITULO</title>
+    <title> Crear cotización</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
@@ -187,6 +186,9 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
 
       <!-- Content Wrapper. Contains page content -->
 
+
+
+        <!-- /.content-wrapper -->
 
 
       <!-- Main Footer -->

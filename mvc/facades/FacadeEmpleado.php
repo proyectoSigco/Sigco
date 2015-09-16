@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: iStam
- * Date: 16/08/15
- * Time: 2:17 AM
- */
+
 include_once'../models/EmpleadoDao.php';
 include_once'../utilities/Conexion.php';
 Class FacadeEmpleado{
@@ -67,6 +62,16 @@ return $this->objDao->obtenerTitulos($rol,$this->con);
     public function listarMetas(){
         return $this->objDao->listarMetas($this->con);
     }
+
+
+  public function buscarCriterio($criterio,$busqueda,$comobuscar){
+      return $this->objDao->buscarEmpleadoCriterio($criterio,$busqueda,$comobuscar,$this->con);
+
+  }
+
+  public function cambiarEstado($user,$estado){
+        return $this->objDao->cambiarEstado($user,$estado,$this->con);
+  }
 
 
 }

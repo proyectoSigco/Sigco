@@ -3,7 +3,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>AdminLTE 2 | Log in</title>
+    <title>Sigco | Iniciar sesión</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
@@ -56,6 +56,9 @@
 
         <?php
         if (isset($_GET['login'])){
+            if (isset($_SESSION['datosLogion'])){
+            session_destroy();
+            }
           ?>
           <script type="text/javascript">
               swal({   title: "Datos de ingreso invalidos",   text: "Por favor intentelo de nuevo",   type: "error",   showCancelButton: false,   confirmButtonColor: "#1B0092",   confirmButtonText: "Regresar",   closeOnConfirm: true }, function(){ });
@@ -64,6 +67,7 @@
         }
         ?>
         <a href="#modal1">Olvidé mi contraseña</a><br>
+
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
 <style>

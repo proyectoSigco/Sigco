@@ -5,7 +5,8 @@
  * Date: 12/08/15
  * Time: 01:42 AM
  */
-
+include_once '../utilities/Conexion.php';
+include_once  '../models/GestionDao.php';
 Class FacadeGestion {
     private $conexion;
     private $gestionDao;
@@ -20,8 +21,8 @@ Class FacadeGestion {
         return $this->gestionDao->registrarGestion($productoDto,$this->conexion);
 
     }
-    public  function getGestiones(){
-        return $this->gestionDao->listarGestion($this->conexion);
+    public  function getGestiones($idUsuario){
+        return $this->gestionDao->listarGestion($idUsuario,$this->conexion);
     }
     public  function  obtenerGestion($userId){
         return $this->gestionDao->buscarGestion($userId,$this->conexion);

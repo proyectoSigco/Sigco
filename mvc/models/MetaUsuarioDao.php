@@ -23,4 +23,63 @@ class MetaUsuarioDao
         return $mensaje;
     }
 
+
+    public function buscarMetaCriterio($criterio, $busqueda, $comobuscar,PDO $cnn){
+        switch ($comobuscar) {
+            case 1:
+                try{
+                    $query = $cnn->prepare("Select * from Metas
+                                            where $criterio='$busqueda' ");
+                    $query->execute();
+                    $_SESSION['conteo'] = $query->rowCount();
+                    return $query->fetchAll();
+                } catch (Exception $ex){
+                    echo '&ex='.$ex->getMessage().'&encontrados=0';
+                };
+                break;
+
+            case 2:
+                try{
+                    $query = $cnn->prepare("Select * from Metas
+                                            where $criterio like '%$busqueda%' ");
+                    $query->execute();
+                    $_SESSION['conteo'] = $query->rowCount();
+                    return $query->fetchAll();
+                } catch (Exception $ex){
+                    echo '&ex='.$ex->getMessage().'&encontrados=0';
+                };
+
+                break;
+        }
+
+    }
+
+    public function buscarMeta($user,PDO $cnn){
+        try{
+            $query = $cnn->prepare("Select * from Metas where IdMeta=?");
+            $query->bindParam(1,$user);
+            $query->execute();
+            $_SESSION['conteo'] = $query->rowCount();
+            return $query->fetch();
+        } catch (Exception $ex) {
+            return $mensaje = $ex->getMessage();
+        }
+    }
+
+    public function listarMeta(PDO $cnn){
+        try{
+            $query = $cnn->prepare("Select * from Metas");
+            $query->execute();
+            $_SESSION['conteo'] = $query->rowCount();
+            return $query->fetchAll();
+        } catch (Exception $ex) {
+            return $mensaje = $ex->getMessage();
+        }
+    }
+
+
+
+
+
+
 }

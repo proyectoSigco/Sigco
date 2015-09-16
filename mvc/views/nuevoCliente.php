@@ -413,7 +413,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
           fixed layout. -->
   </body>
   <script type="text/javascript">
-$(document).ready(function() {   
+$(document).ready(function() {
 
     function randomNumber(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
@@ -423,7 +423,7 @@ $(document).ready(function() {
         $('#captchaOperation').html([randomNumber(1, 100), '+', randomNumber(1, 200), '='].join(' '));
     }
 
-    generateCaptcha(); 
+    generateCaptcha();
     $('#defaultForm').formValidation({
         message: 'This value is not valid',
         icon: {
@@ -431,7 +431,7 @@ $(document).ready(function() {
             invalid: 'glyphicon glyphicon-remove',
             validating: 'glyphicon glyphicon-refresh'
         },
-         
+
                 locale: 'es_ES',
 
         fields: {

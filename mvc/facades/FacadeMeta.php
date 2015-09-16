@@ -23,5 +23,10 @@ class FacadeMeta
         return $this->objDao->registrarMeta($dto,$this->con);
     }
 
+    public function modificarMeta($user,MetaDto $dto){
+        return $this->objDao->modificarMeta($dto,$user,$this->con);
+
+    }
+
 
 }

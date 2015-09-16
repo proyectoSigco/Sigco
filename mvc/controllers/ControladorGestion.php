@@ -18,6 +18,7 @@ if (isset($_POST['registrar'])) {
     $gestion->setAsunto($_POST['temaproducto']);
     $gestion->setLugar($_POST['lugar']);
     $gestion->setFechaVisita($_POST['fechaVisita']);
+    $gestion->setIdUsuario($_SESSION['datosLogin']['id']);
     $mensaje = $fachada->registrarGestion($gestion);
     header("Location: ../views/buscarGestion.php?mensaje=".$mensaje);
 
@@ -45,7 +46,7 @@ if (isset($_POST['modificar'])) {
     $idviejo=$_GET['idv'];
     $gestion->setIdCliente ($_POST['idCliente']);
     $gestion->setTipoVisita($_POST['tipoVisita']);
-    if($_POST['tipoVisita']=='Capacitacion'){
+    if($_POST['tipoVisita']=='CAPACITACION'){
         $gestion->setTemaProducto($_POST['temaproducto']);
     }else{
         $gestion->setTemaProducto($_POST['tema']);
@@ -57,6 +58,7 @@ if (isset($_POST['modificar'])) {
     $gestion->setLugar($_POST['lugar']);
     $gestion->setFechaVisita($_POST['fechaVisita']);
     $gestion->setEstado($_POST['estado']);
+    $gestion->setIdUsuario($_SESSION['datosLogin']['id']);
     $mensaje = $fachada->modificarGestion($gestion,$idviejo);
 
     header("Location: ../views/buscarGestion.php?mensaje=".$mensaje);
@@ -76,7 +78,7 @@ if (isset($_GET['buscar'])) {
 }
 
 if (isset($_GET['listar'])) {
-    $resul = $fachada->getGestiones();
+    $resul = $fachada->getGestiones($_SESSION['datosLogin']['id']);
     $_SESSION['consulta']=$resul;
     if($resul==null){
         header("Location: ../views/buscarGestion.php?encontrados=false&criterio=".$criterio."&busqueda=".$busqueda."&comobuscar=".$comobuscar);

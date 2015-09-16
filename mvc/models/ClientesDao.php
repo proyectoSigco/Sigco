@@ -35,9 +35,15 @@ class ClientesDao
             $query->bindParam(7, $clienteDto->getIdActividad());
             $query->bindParam(8, $clienteDto->getIdLugar());
             $query->bindParam(9, $clienteDto->getCedula());
-
             $query->execute();
 
+            $query3=$cnn->prepare("Insert into RolesUsuarios VALUES (1,?)");
+            $query3->bindParam(1,$clienteDto->getCedula());
+            $query3->execute();
+
+            $query4=$cnn->prepare("Insert into Empleados VALUES (DEFAULT,?,'Cliente')");
+            $query4->bindParam(1,$clienteDto->getCedula());
+            $query4->execute();
             $mensaje="Cliente registrado con éxito en la base de datos.&error=0";
 
         } catch (Exception $ex){

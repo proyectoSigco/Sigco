@@ -30,14 +30,12 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
     -->
     <link href="../../dist/css/skins/skin-blue.min.css" rel="stylesheet" type="text/css" />
     <link href="../../dist/css/style.css" rel="stylesheet" type="text/css" />
-
     <!-- FORMVALIDATION -->
     <script type="text/javascript" src="../../plugins/jQuery/jquery-1.11.3.js"></script>
     <script type="text/javascript" src="../../plugins/formvalidation/formValidation.js"></script>
     <script type="text/javascript" src="../../plugins/formvalidation/framework/bootstrap.js"></script>
     <script type="text/javascript" src="../../plugins/formvalidation/language/es_ES.js"></script>
-
-
+    <script type="text/javascript" src="../../plugins/select2/select2.js"></script>
 
     <link rel="stylesheet" href="../../date/jquery-ui.css">
   <script src="../../date/jquery-ui.js"></script>
@@ -241,16 +239,13 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                                         <select class="form-control select2"  data-placeholder="Seleccione una Empresa" name="idCliente" id="idCliente" >
                                             <?php
                                             require_once '../facades/FacadeGestion.php';
-                                            require_once '../utilities/Conexion.php';
-                                            require_once  '../models/GestionDao.php';
                                             require_once '../facades/FacadeProducto.php';
-                                            require_once '../utilities/Conexion.php';
-                                            require_once  '../models/ProductoDao.php';
+
                                             $empresa = new FacadeGestion();
                                             $empresas = $empresa->obtenerEmpresas();
                                             foreach($empresas as $iterator) { ?>
                                                 <option value="<?php echo $iterator['Nit']; ?>"><?php echo $iterator['Nit']; ?></option>
-                                            <?php  }?>
+                                            <?php } ?>
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -278,7 +273,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                                             }?>
                                         </select>
                                     </div>
-                                    <div class="form-group" hidden="" id="tema">
+                                    <div class="form-group"  id="tema">
                                         <label for="email" >Tema*</label>
                                         <input class="form-control" name="temaproducto"  type="text" maxlength="20" placeholder="Desengrasantes">
                                     </div>
@@ -477,7 +472,13 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
               }
           });
       });
-
+      $.post("../controllers/ControladorGestion.php",
+          {
+              reload: $('#idCliente').val()
+          },
+          function (data) {
+              $('#cliente').val(data);
+          });
 
   </script>
   <script>

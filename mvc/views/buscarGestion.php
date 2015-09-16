@@ -17,7 +17,9 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
-    <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+      <link href="../../plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+
+      <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- Font Awesome Icons -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <!-- Ionicons -->
@@ -161,7 +163,9 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                     <li class="active"><a href="index.php"><i class="fa fa-desktop"></i> <span>Inicio</span></a></li>
                     <?php
                     require'../facades/FacadeEmpleado.php';
+                    require'../facades/FacadeProducto.php';
                     $facade=new FacadeEmpleado();
+                    $facadeProducto=new Facade();
                     $titulos=$facade->obtenerMenu($_SESSION['rol']['rol']);
                     foreach ($titulos as $menu ) {?>
                         <li class="treeview">
@@ -271,12 +275,14 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                         <div class="modal fade" id="myModal">
                             <div class="modal-dialog" >
                                 <div class="modal-content" style="border-radius: 5px;">
-                                    <div class="modal-header"   style="background-color: #28B46A;border-radius: 5px 5px 0px 0px;color:#FFF">
+                                    <div class="modal-header"   style="background-color: #3c8dbc;border-radius: 5px 5px 0px 0px;color:#FFF;text-align: center">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                                         <h4 class="modal-title">Detalle de Gestión</h4>
                                     </div>
                                     <div class="modal-body" class="pull-left col-md-8">
                                         <dl class="dl-horizontal">
+                                            <dt>Nit Cliente</dt>
+                                            <dd id="Cliente">A description list is perfect for defining terms.</dd>
                                             <dt>Actividad</dt>
                                             <dd id="actividad">A description list is perfect for defining terms.</dd>
                                             <dt>Tema</dt>
@@ -289,13 +295,14 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                                             <dd id="lugar"></dd>
                                             <dt>Fecha</dt>
                                             <dd id="fecha"></dd>
+                                            <dt>Modificado por:</dt>
+                                            <dd id="modificacion"></dd>
                                         </dl>
                                         <!--<p><input type="text" class="input-sm" id="txtfname"/></p>
                                         <p><input type="text" class="input-sm" id="txtlname"/></p>-->
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                                     </div>
                                 </div><!-- /.modal-content -->
                             </div><!-- /.modal-dialog -->
@@ -330,7 +337,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                                         </div><!-- /btn-group -->
                                         <input type="text" name="busqueda" class="form-control" placeholder="Número Nit | Razón Social | Lugar" required tabindex="3">
                     <span class="input-group-btn">
-                      <button class="btn btn-info btn-flat" type="submit" tabindex="4">Buscar cotización</button>
+                      <button class="btn btn-info btn-flat" type="submit" tabindex="4">Buscar Gestión</button>
                     </span>
                                     </div><!-- /input-group -->
 
@@ -384,13 +391,16 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                                     <!-- /.box-header -->
                                     <div class="box-body">
                                         <dl class="dl-horizontal">
-                                            <dt><span class="label label-success">Activo</span>
-                                                <span class="label label-warning">Inactivo</span></dt>
-                                            <dd>Cambia el estado de un cliente.</dd>
+                                            <dt><span class="label label-success">Realizada</span>
+                                                <span class="label label-warning">Pendiente</span>
+
+                                            </dt>
+                                            <dt><span class="label label-danger">Cancelada</span></dt>
+                                            <dd>Cambia el estado de una visita.</dd>
                                             <dt><i class="fa fa-search-plus"></i> </dt>
-                                            <dd>Muestra la información completa de un cliente.</dd>
+                                            <dd>Muestra la información detallada de un visita.</dd>
                                             <dt><i class="fa fa-edit"></i></dt>
-                                            <dd>Permite editar la información de un cliente.</dd>
+                                            <dd>Permite editar la información de una visita.</dd>
                                             <dt><span class="label label-default">  <i class="fa fa-file-excel-o"></i>
                                   Exportar consulta completa</span></dt>
                                             <dd>Guardar la consulta con toda la información en formato XLS.</dd>
@@ -424,7 +434,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                                             <tbody>
                                             <?php
                                             $consulta = $_SESSION['consulta'];
-                                            $_SESSION['exportar'] = $consulta;
+                                            $_SESSION['GestionExportar'] = $consulta;
                                             foreach ($consulta as $respuesta){
                                             ?>
                                             <tr>
@@ -432,7 +442,13 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                                                     <?php echo $respuesta['TipoGestiones']; ?>
                                                 </td>
                                                 <td>
-                                                    <?php echo $respuesta['Asunto']; ?>
+                                                    <?php if(is_numeric( $respuesta['Asunto'])){
+                                                        $procut=$facadeProducto->obtenerProducto($respuesta['Asunto']);
+                                                        echo $procut['NombreProducto'];
+                                                    }
+                                                    else{
+                                                        echo $respuesta['Asunto'];
+                                                    }?>
                                                 </td>
                                                 <td>
                                                     <?php echo $respuesta['LugarGestiones']; ?>
@@ -448,7 +464,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                                                     <button data-toggle="tooltip" title="Ver Detalle" class="btn btn-primary btn-xs fa fa-search-plus click" value="<?php echo $respuesta['IdGestion'];?>">
 
                                                     </button>
-                                                    <a data-toggle="tooltip" title="Editar información" href="ModificarGestion.php?id=<?php echo $respuesta['IdGestion'];?>">
+                                                    <a data-toggle="tooltip" title="Editar información" href="ModificarGestion.php?id=<?php echo $respuesta['IdGestion'];?>" <?php if(!$_SESSION['datosLogin']['NombreRol']=='Coordinador' or (!$_SESSION['datosLogin']['NombreRol']=='Asesor')){ echo 'hidden=';} ?> >
                                                         <i class="fa fa-fw fa-edit" ></i>
                                                     </a>
                                                 </td>
@@ -469,7 +485,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                                         </table>
                                     </div>
                                     <div class="box-footer">
-                                        <form role="form" action="../utilities/exportarClientes.php?busqueda=<?php
+                                        <form role="form" action="../utilities/exportarGestion.php?busqueda=<?php
                                         if(isset($_GET['busqueda'])){echo $_GET['busqueda'];}else{echo'todos';} ?>" method="post">
                                             <button type="submit" class="btn btn-default pull-right" tabindex="14"
                                                     value="exportar" name="exportar" id="todos"><i class="fa fa-file-excel-o"></i>  Exportar consulta completa
@@ -537,7 +553,8 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
     <script src="../../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/app.min.js" type="text/javascript"></script>
-
+    <script src="../../plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="../../plugins/datatables/dataTables.bootstrap.min.js" type="text/javascript"></script>
     <!-- Optionally, you can add Slimscroll and FastClick plugins.
           Both of these plugins are recommended to enhance the
           user experience. Slimscroll is required when using the
@@ -568,6 +585,9 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                       $('#observaciones').text(json.ObservacionesGestiones);
                       $('#lugar').text(json.LugarGestiones);
                       $('#fecha').text(json.FechaProgramada);
+                      $('#modificacion').text(json.CedulaEmpleadoGestiones);
+                      $('#Cliente').text(json.NitClienteGestiones);
+
                       $("#myModal").modal("show");
 
                   });
@@ -710,6 +730,19 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
           $('span:contains("Pendiente")').addClass('label-warning');
           $('span:contains("Realizada")').addClass('label-success');
           $('span:contains("Cancelada")').addClass('label-danger');
+      });
+  </script>
+  <script type="text/javascript">
+      $(function () {
+          $("#example1").DataTable();
+          $('#example2').DataTable({
+              "paging": true,
+              "lengthChange": false,
+              "searching": false,
+              "ordering": true,
+              "info": true,
+              "autoWidth": false
+          });
       });
   </script>
 </html>

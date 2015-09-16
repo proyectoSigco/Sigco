@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="MySQL - SIGCO@localhost" uuid="1ac889c9-ab95-4526-89f1-3a50a4f220d2">
+      <secret-storage>master_key</secret-storage>
+      <user-name>sigco2015</user-name>
+      <schema-pattern>SIGCO.*</schema-pattern>
+      <default-schemas>SIGCO.*</default-schemas>
+    </data-source>
+  </component>
+</project>

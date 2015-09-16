@@ -277,7 +277,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                             <?php
                             require'../facades/FacadeCotizaciones.php';
                             $coti= new FacadeCotizaciones();
-                            $cotizacion=$coti->buscarCotizacion($cotizacion);
+                            $cotizacion=$coti->buscarCotizacion($_POST['idcliente']);
                             ?>
                             <div class="box box-default">
                                 <div class="box-header with-border">
@@ -287,7 +287,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                                 <div class="box-body">
                                     <div class="form-group">
                                         <label for="cantidad">Valor Cotizacion:*</label>
-                                        <input class="form-control" name="valorcoti" id="valorcoti" type="text" value="<?php echo $cotizacion['ValorTotalCotizacion']?>" readonly>
+                                        <input class="form-control" name="valorcoti" id="valorcoti" type="text" value="<?php echo $cotizacion[0]['ValorTotalCotizacion']?>" readonly>
                                     </div>
 
                                     <div class="form-group">
@@ -308,8 +308,8 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                                     <div class="form-group">
                                         <label for="cantidad">Total a pagar:*</label>
 
-                                        <input class="form-control" name="total" id="total" type="text" value="<?php echo $cotizacion['ValorTotalCotizacion']?>" readonly>
-                                        <input hidden name="idcoti" value="<?php echo $cotizacion['IdCotizacion']?>">
+                                        <input class="form-control" name="total" id="total" type="text" value="<?php echo $cotizacion[0]['ValorTotalCotizacion']?>" readonly>
+                                        <input hidden name="idcoti" value="<?php echo $cotizacion[0]['IdCotizacion']?>">
                                     </div>
 
                                     <div class="form-group">

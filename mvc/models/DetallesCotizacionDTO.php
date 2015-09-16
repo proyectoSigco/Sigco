@@ -6,6 +6,26 @@ class DetallesCotizacionDTO
     private $idProducto;
     private $cantidad;
     private $total;
+    private $iva;
+
+    /**
+     * @return mixed
+     */
+    public function getIva()
+    {
+        return $this->iva;
+    }
+
+    /**
+     * @param mixed $iva
+     */
+    public function setIva($iva)
+    {
+        $this->iva = $iva;
+    }
+
+
+
 
     /**
      * @return mixed

@@ -1,6 +1,4 @@
 <?php
-
-
 class EmpleadoDao {
     public function registrarEmpleado(EmpleadoDto $dto,PDO $cnn) {
 
@@ -68,18 +66,22 @@ class EmpleadoDao {
 
         $mensaje = "";
         try {
-            $query = $cnn->prepare("UPDATE  Usuarios SET IdUsuario=?,Nombres=?,Apellidos=?,Empleo=?,Email=?,Contrasenia=?,Estado=?,rutaImagen=? where Idusuario=?");
-            $query->bindParam(1, $obj->getIdUsuario());
-            $query->bindParam(2, $obj->getNombres());
-            $query->bindParam(3, $obj->getApellidos());
-            $query->bindParam(4, $obj->getEmpleo());
-            $query->bindParam(5, $obj->getEmail());
-            $query->bindParam(6, md5($obj->getContrasenia()));
-            $query->bindParam(7, $obj->getEstado());
-            $query->bindParam(8, $obj->getRutaimagen());
-            $query->bindParam(9, $user);
+            $query2= $cnn->prepare("Update Empleados set Cargo=? where CedulaEmpleado=?");
+            $query2->bindParam(1,$obj->getEmpleo());
+            $query2->bindParam(2,$obj->getIdUsuario());
+            $query2->execute();
+            $query = $cnn->prepare("UPDATE  Personas SET Nombres=?,Apellidos=?,EmailPersona=?,EstadoPersona=?,Contrasenia=?,RutaImagenPersona=?,CelularPersona=? where IdPersona=?");
+            $query->bindParam(1, $obj->getNombres());
+            $query->bindParam(2, $obj->getApellidos());
+            $query->bindParam(3, $obj->getEmail());
+            $query->bindParam(4, $obj->getEstado());
+            $query->bindParam(5, md5($obj->getContrasenia()));
+            $query->bindParam(6, $obj->getRutaimagen());
+            $query->bindParam(7, $obj->getCelular());
+            $query->bindParam(8, $user);
             $query->execute();
-            $mensaje = true;
+
+            return "Empleado actualizado exitosamente";
         } catch (Exception $ex) {
             $mensaje = $ex->getMessage();
         }
@@ -89,7 +91,7 @@ class EmpleadoDao {
     public function buscarUsuario($id,PDO $cnn) {
 
         try {
-            $query = $cnn->prepare('SELECT * FROM Usuarios WHERE IdUsuario=?');
+            $query = $cnn->prepare('SELECT * FROM Personas join Empleados on Personas.CedulaPersona=Empleados.CedulaEmpleado WHERE Personas.IdPersona=?');
             $query->bindParam(1, $id);
             $query->execute();
             return $query->fetch();
@@ -98,24 +100,11 @@ class EmpleadoDao {
         }
         $cnn=null;
     }
-    public function cancelarUsuario($id,PDO $cnn) {
 
-        $mensaje = "";
-        try {
-            $query = $cnn->prepare("Update Usuarios set Estado=0 WHERE IdUsuario=?");
-            $query->bindParam(1,$id);
-            $query->execute();
-            $mensaje = true;
-        } catch (Exception $ex) {
-            $mensaje = $ex->getMessage();
-        }
-        return $mensaje;
-    }
     public function listarUsuarios(PDO $cnn) {
 
         try {
-            $listarGesion = 'Select * from Usuarios';
-            $query = $cnn->prepare($listarGesion);
+            $query = $cnn->prepare("Select * from Empleados JOIN Personas on Empleados.CedulaEmpleado=Personas.CedulaPersona");
             $query->execute();
             return $query->fetchAll();
         } catch (Exception $ex) {
@@ -191,6 +180,49 @@ where PermisosRoles.IdRolPermisosRoles=? group by PermisosCategorias.IdCategoria
     }
 
 
+    public function buscarEmpleadoCriterio($criterio, $busqueda, $comobuscar,PDO $cnn){
+        switch ($comobuscar) {
+            case 1:
+                try{
+                    $query = $cnn->prepare("Select * from Empleados JOIN Personas on Empleados.CedulaEmpleado=Personas.CedulaPersona
+                                            where $criterio='$busqueda' ");
+                    $query->execute();
+                    $_SESSION['conteo']=$query->rowCount();
+                    return $query->fetchAll();
+                } catch (Exception $ex){
+                    echo '&ex='.$ex->getMessage().'&encontrados=0';
+                };
+                break;
 
+            case 2:
+                try{
+                    $query = $cnn->prepare("Select * from Empleados JOIN Personas on Empleados.CedulaEmpleado=Personas.CedulaPersona
+                                            where $criterio like '%$busqueda%' ");
+                    $query->execute();
+                    $_SESSION['conteo']=$query->rowCount();
+                    return $query->fetchAll();
+                } catch (Exception $ex){
+                    echo '&ex='.$ex->getMessage().'&encontrados=0';
+                };
 
+                break;
+        }
+
+    }
+
+    public function cambiarEstado($user,$estado,PDO $cnn) {
+        $mensaje = "";
+        try {
+                $query2= $cnn->prepare("Update Personas set EstadoPersona=? where CedulaPersona=?");
+            $query2->bindParam(1,$estado);
+            $query2->bindParam(2,$user);
+            $query2->execute();
+
+            return "El empleado ahora se encuentra ".$estado;
+        } catch (Exception $ex) {
+            $mensaje = $ex->getMessage();
+        }
+        $cnn=null;
+        return $mensaje;
+    }
 }

@@ -19,7 +19,7 @@ class OrdenDeCompraDAO {
             $estado= $cnn->prepare("Update Cotizaciones set EstadoCotización='OC' where IdCotizacion=?");
             $estado->bindParam(1,$dto->getCotizacionId());
             $estado->execute();
-            return "OC registrada, Cotizacion cambiada";
+            return "Orden de compra registrada, Cotizacion cambiada";
         }catch (Exception $ex){
             $mensaje = '&detalleerror='.$ex->getMessage().'&error=1&mensaje=La orden de compra NO pudo ser registrada';
         }
@@ -29,7 +29,7 @@ class OrdenDeCompraDAO {
 
     public function listarOrdenes(PDO $cnn){
         try{
-            $query = $cnn->prepare("Select * from OrdenesDeCompra JOIN Cotizaciones on Cotizaciones.IdCotizacion=OrdenesDeCompra.IdOrden
+            $query = $cnn->prepare("Select * from OrdenesDeCompra JOIN Cotizaciones on Cotizaciones.IdCotizacion=OrdenesDeCompra.IdCotizacionOrdenesCompra
                                             JOIN Clientes on Clientes.Nit=Cotizaciones.IdClienteCotizaciones");
             $query->execute();
             $_SESSION['conteo'] = $query->rowCount();
@@ -43,7 +43,7 @@ class OrdenDeCompraDAO {
         switch ($comobuscar) {
             case 1:
                 try{
-                    $query = $cnn->prepare("Select * from OrdenesDeCompra JOIN Cotizaciones on Cotizaciones.IdCotizacion=OrdenesDeCompra.IdOrden
+                    $query = $cnn->prepare("Select * from OrdenesDeCompra JOIN Cotizaciones on Cotizaciones.IdCotizacion=OrdenesDeCompra.IdCotizacionOrdenesCompra
                                             JOIN Clientes on Clientes.Nit=Cotizaciones.IdClienteCotizaciones
                                             where $criterio='$busqueda' ");
                     $query->execute();
@@ -56,7 +56,7 @@ class OrdenDeCompraDAO {
 
             case 2:
                 try{
-                    $query = $cnn->prepare("Select * from OrdenesDeCompra JOIN Cotizaciones on Cotizaciones.IdCotizacion=OrdenesDeCompra.IdOrden
+                    $query = $cnn->prepare("Select * from OrdenesDeCompra JOIN Cotizaciones on Cotizaciones.IdCotizacion=OrdenesDeCompra.IdCotizacionOrdenesCompra
                                             JOIN Clientes on Clientes.Nit=Cotizaciones.IdClienteCotizaciones
                                             where $criterio like '%$busqueda%' ");
                     $query->execute();
@@ -68,6 +68,19 @@ class OrdenDeCompraDAO {
 
                 break;
         }
+
+    }
+
+    public function cancelarOrden($user,PDO $cnn){
+        try{
+        $query=$cnn->prepare("Update OrdenesDeCompra set EstadoOrdenCompra='Cancelada' where IdOrden=?");
+            $query->bindParam(1,$user);
+            $query->execute();
+            return "Orden de compra cancelada exitosamente";
+        }catch (Exception $ex){
+            return $ex->getMessage();
+        }
+
 
     }
 

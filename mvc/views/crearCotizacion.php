@@ -36,7 +36,8 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
     <script type="text/javascript" src="../../plugins/formvalidation/framework/bootstrap.js"></script>
     <script type="text/javascript" src="../../plugins/formvalidation/language/es_ES.js"></script>
 
-
+      <script type="text/javascript" src="../../plugins/select2/select2.js"></script>
+      <link href="../../plugins/select2/select2.css" rel="stylesheet" type="text/css" />
 
     <link rel="stylesheet" href="../../date/jquery-ui.css">
   <script src="../../date/jquery-ui.js"></script>
@@ -252,7 +253,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                       }
                   }
                   ?>
-                    <form id="defaultForm" action="crearCotizacion2.php" method="post">
+                    <form id="defaultForm" action="crearCotizacion2.php" method="get">
 
                       <div class="box box-default">
                                   <div class="box-header with-border">
@@ -282,7 +283,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                            <div class="box-body">
                                       <div class="form-group">
                                           <label for="cc">Seleccione el cliente*</label>
-                                          <select class="form-control" name="idcliente" id="idcliente">
+                                          <select class="form-control select2" name="idcliente" id="idcliente">
                                               <?php
                                               include_once'../facades/ClienteFacade.php';
                                               $dao=new ClienteFacade();
@@ -493,4 +494,8 @@ $(document).ready(function() {
     });
 });
 </script>
+  <script>
+      $(".select2").select2();
+
+  </script>
 </html>

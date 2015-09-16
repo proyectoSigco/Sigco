@@ -191,8 +191,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
 
             <section class="content-header">
                 <h1>
-                    Invoice
-                    <small>#007612</small>
+                    Factura
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
@@ -209,7 +208,8 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                     <div class="col-xs-12">
                         <h2 class="page-header">
                             <i class="fa fa-globe"></i> SIGCO.
-                            <small class="pull-right">Date: 2/10/2014</small>
+                            <small class="pull-right">Fecha: <?php echo date("j") . " /" . date("m") . " /" . date("Y");
+                                ?></small>
                         </h2>
                     </div><!-- /.col -->
                 </div>
@@ -300,7 +300,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                         <img src="../../dist/img/credit/paypal2.png" alt="Paypal"/>
                         <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
                             Recuerde que esta cotización tiene vigencia de 30 días apartir de su fecha de creación.
-                            Ante cualquier comentario contactenos atraves de meimporta@sigco.com
+                            Ante cualquier comentario contactenos a través de contacto@sigco.com
                         </p>
                     </div><!-- /.col -->
                     <div class="col-xs-6">
@@ -308,10 +308,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                             ?></p>
                         <div class="table-responsive">
                             <table class="table">
-                                <tr>
-                                    <th style="width:50%">Subtotal:</th>
-                                    <td><?php echo $totalsub?></td>
-                                </tr>
+
                                 <tr>
                                     <th>Total IVA:</th>
                                     <td><?php echo $totaliva?></td>
@@ -319,7 +316,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
 
                                 <tr>
                                     <th>Total:</th>
-                                    <td><?php echo $totalsub+$totaliva?></td>
+                                    <td><?php echo $totalsub?></td>
                                 </tr>
                             </table>
                         </div>

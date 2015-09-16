@@ -8,6 +8,7 @@ session_start();
 if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['datosLogin'])){
     header('location: Invalido.php');
 }
+
 ?>
 
 <html>
@@ -28,7 +29,9 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect.
     -->
-    <link href="../../dist/css/skins/skin-blue.min.css" rel="stylesheet" type="text/css" />
+      <link href="../../plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+
+      <link href="../../dist/css/skins/skin-blue.min.css" rel="stylesheet" type="text/css" />
     <link href="../../dist/css/style.css" rel="stylesheet" type="text/css" />
 
     <!-- FORMVALIDATION -->
@@ -411,12 +414,19 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                                                     <?php echo $respuesta['DescuentoTotal']; ?>
                                                 </td>
                                                 <td>
-                                                    <a href="modificarCliente.php?IdPersona=<?php echo $respuesta['IdPersona'].'&IdCliente='.$respuesta['IdCliente']; ?>">
+                                                    <a href="detallesCotizacion.php?coti=<?php echo $respuesta['IdCotizacion'] ?>">
                                                         <i class="fa fa-search-plus" title="Ver detalles"></i>
                                                     </a>
-                                                    <a href="modificarCliente.php?IdPersona=<?php echo $respuesta['IdPersona'].'&IdCliente='.$respuesta['IdCliente']; ?>">
-                                                        <i class="fa fa-fw fa-edit" title="Editar información"></i>
-                                                    </a>
+                                                    <?php
+                                                    if ($_SESSION['rol']['rol']==3) {
+
+                                                        ?>
+                                                        <a href="../controllers/ControladorOrdenCompra.php?id=<?php echo $respuesta['IdOrden'] ?>&cancelar=true">
+                                                            <i class="fa fa-fw fa-remove"
+                                                               title="Editar información"></i>
+                                                        </a>
+                                                        <?php
+                                                    }?>
                                                 </td>
                                                 <?php
                                                 }
@@ -435,8 +445,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                                         </table>
                                     </div>
                                     <div class="box-footer">
-                                        <form role="form" action="../utilities/exportarClientes.php?busqueda=<?php
-                                        if(isset($_GET['busqueda'])){echo $_GET['busqueda'];}else{echo'todos';} ?>" method="post">
+                                        <form role="form" action="../utilities/exportarOrdenes.php" method="post">
                                             <button type="submit" class="btn btn-default pull-right" tabindex="14"
                                                     value="exportar" name="exportar" id="todos"><i class="fa fa-file-excel-o"></i>  Exportar consulta completa
                                             </button>
@@ -503,7 +512,8 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
     <script src="../../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/app.min.js" type="text/javascript"></script>
-
+    <script src="../../plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="../../plugins/datatables/dataTables.bootstrap.min.js" type="text/javascript"></script>
     <!-- Optionally, you can add Slimscroll and FastClick plugins.
           Both of these plugins are recommended to enhance the
           user experience. Slimscroll is required when using the
@@ -552,4 +562,17 @@ $(document).ready(function() {
     });
 });
 </script>
+  <script type="text/javascript">
+      $(function () {
+          $("#example1").DataTable();
+          $('#example2').DataTable({
+              "paging": true,
+              "lengthChange": false,
+              "searching": false,
+              "ordering": true,
+              "info": true,
+              "autoWidth": false
+          });
+      });
+  </script>
 </html>

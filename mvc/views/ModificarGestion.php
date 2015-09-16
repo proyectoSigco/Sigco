@@ -24,6 +24,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
     <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
     <link href="../../dist/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../plugins/select2/select2.css" rel="stylesheet" type="text/css" />
     <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
           page. However, you can choose any other skin. Make sure you
           apply the skin class to the body tag so the changes take effect.
@@ -36,6 +37,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
     <script type="text/javascript" src="../../plugins/formvalidation/formValidation.js"></script>
     <script type="text/javascript" src="../../plugins/formvalidation/framework/bootstrap.js"></script>
     <script type="text/javascript" src="../../plugins/formvalidation/language/es_ES.js"></script>
+    <script type="text/javascript" src="../../plugins/select2/select2.js"></script>
 
 
 
@@ -238,7 +240,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                                     <div class="form-group">
 
                                         <label for="cc">Nit*</label>
-                                        <select class="form-control" name="idCliente" id="idCliente" >
+                                        <select class="form-control select2" name="idCliente" id="idCliente" >
                                             <?php
                                             require_once '../facades/FacadeGestion.php';
                                             require_once '../utilities/Conexion.php';
@@ -260,12 +262,12 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
 
                                     <div class="form-group">
                                         <label for="names">Nombre del cliente:</label>
-                                        <input class="form-control" name="cliente" id="cliente" type="text"   readonly>
+                                        <input class="form-control" name="cliente" id="cliente" type="text" value="<?php echo $empresas['RazonSocial']; ?>"  readonly>
 
                                     </div>
                                     <div class="form-group">
                                         <label for="apellido">Tipo visita*</label>
-                                        <select class="form-control" name="tipoVisita" id="tipoVisita">
+                                        <select class="form-control select2" name="tipoVisita" id="tipoVisita">
 
                                             <option value="ASESORIA"<?php if($empresas['TipoGestiones']=='ASESORIA') {echo 'selected';} ?>> ASESORIA</option>
                                             <option value="CAPACITACION" <?php if($empresas['TipoGestiones']=='CAPACITACION') {echo 'selected';}?>>CAPACITACIÓN</option>
@@ -273,9 +275,9 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                                         </select>
 
                                     </div>
-                                    <div class="form-group" hidden="true" id="producto">
+                                    <div class="form-group" id="producto">
                                         <label for="cargo">Producto*</label>
-                                        <select  class="form-control" name="temaproducto">
+                                        <select  class="form-control select2" name="temaproducto">
                                             <?php
                                             $producto = new Facade();
                                             $productos = $producto->getProductos();
@@ -311,7 +313,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
 
                                     <div class="form-group">
                                         <label for="imagen">Estado de visita</label>
-                                        <select class="form-control" name="estado" type="text"  id="lugar" placeholder="Carrera 15 # 24 10" required>
+                                        <select class="form-control select2" name="estado" type="text"  id="lugar" placeholder="Carrera 15 # 24 10" required>
                                             <option value="PENDIENTE" <?php if($empresas['EstadoGestiones']=='Pendiente'){ echo 'selected'; }  ?> >PENDIENTE</option>
                                             <option value="CANCELADA" <?php if($empresas['EstadoGestiones']=='Cancelada'){ echo 'selected'; }  ?>>CANCELADA</option>
                                             <option value="REALIZADA"<?php if($empresas['EstadoGestiones']=='Realizada'){ echo 'selected'; }  ?>>REALIZADA</option>
@@ -320,7 +322,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                                     <div class="box-footer">
 
                                         <input type="button" class="btn btn-warning" tabindex="15"
-                                               onclick="location.href='listarGestion.php'" value="Cancelar"/>
+                                               onclick="location.href='buscarGestion.php'" value="Cancelar"/>
                                         <button type="submit" class="btn btn-success pull-right" tabindex="14"
                                                 value="registrar" name="modificar" id="guardar">Guardar Gestión
                                         </button>
@@ -415,5 +417,40 @@ $(document).ready(function() {
         }
     });
 });
+$(".select2").select2();
+$( function () {
+    if($('#tipoVisita').val()=='CAPACITACION'){
+        $('#tema').hide();
+        $('#producto').show();
+    }else{
+        $('#producto').hide();
+        $('#tema').show();
+
+    }
+
+});
 </script>
+  <script>
+
+      $('#idCliente').on('change', function () {
+          $.post("../controllers/ControladorGestion.php",
+              {
+                  reload: $('#idCliente').val()
+              },
+              function (data) {
+                  $('#cliente').val(data);
+              });
+
+      });
+      $('#tipoVisita').on('change',function(){
+          if($('#tipoVisita').val()=='CAPACITACION'){
+              $('#tema').hide();
+              $('#producto').show();
+          }else{
+              $('#producto').hide();
+              $('#tema').show();
+
+          }
+      });
+ </script>
 </html>

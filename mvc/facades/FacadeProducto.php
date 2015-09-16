@@ -44,4 +44,6 @@ class Facade {
         return $this->objDao->searchProduct($criteria,$this->con);
     }
 
+
+
 }

@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - SIGCO@localhost" uuid="1ac889c9-ab95-4526-89f1-3a50a4f220d2">
+    <database-info product="MySQL" version="5.6.25" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="mixed" quoted-identifiers="upper"/>
+    <schema name="" catalog="SIGCO"/>
+    <table name="ActividadesEmpresas" schema="" catalog="SIGCO" type="TABLE">
+      <column name="IdActividad" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="NombreActividad" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="PagaIva" sqlType="ENUM" precision="3" scale="0" nullable="false" jdbcType="1"/>
+      <primary-key name="PRIMARY" columns="IdActividad"/>
+      <exported-key name="fk_Clientes_ActividadesEmpresas1" table="Clientes" schema="" catalog="SIGCO" columns="IdActividadCliente"/>
+    </table>
+    <table name="CategoriasProductos" schema="" catalog="SIGCO" type="TABLE">
+      <column name="IdCategoria" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="NombreCategoria" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="IdCategoria"/>
+      <exported-key name="fk_Productos_CategoriaProducto1" table="Productos" schema="" catalog="SIGCO" columns="IdCategoriaProductos"/>
+    </table>
+    <table name="Clasificaciones" schema="" catalog="SIGCO" type="TABLE">
+      <column name="IdClasificacion" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="NombreClasificacion" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="IdClasificacion"/>
+      <exported-key name="fk_Clientes_Clasificaciones1" table="Clientes" schema="" catalog="SIGCO" columns="IdClasificacionCliente"/>
+    </table>
+    <table name="Clientes" schema="" catalog="SIGCO" type="TABLE">
+      <column name="IdCliente" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Nit" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="RazonSocial" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Direccion" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Telefono" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="EmailCliente" sqlType="VARCHAR" precision="70" scale="0" nullable="false" jdbcType="12"/>
+      <column name="IdTipoCliente" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="IdActividadCliente" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="IdClasificacionCliente" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="IdLugarCliente" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="CedulaCliente" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="IdCliente"/>
+      <foreign-key name="fk_Clientes_ActividadesEmpresas1" columns="IdActividadCliente" ref-table="ActividadesEmpresas" ref-schema="" ref-catalog="SIGCO" ref-columns="IdActividad" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="fk_Clientes_Ciudades1" columns="IdLugarCliente" ref-table="Lugares" ref-schema="" ref-catalog="SIGCO" ref-columns="IdLugar" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="fk_Clientes_Clasificaciones1" columns="IdClasificacionCliente" ref-table="Clasificaciones" ref-schema="" ref-catalog="SIGCO" ref-columns="IdClasificacion" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="fk_Clientes_Personas" columns="CedulaCliente" ref-table="Personas" ref-schema="" ref-catalog="SIGCO" ref-columns="CedulaPersona" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="fk_Clientes_TiposEmpresas1" columns="IdTipoCliente" ref-table="TiposEmpresas" ref-schema="" ref-catalog="SIGCO" ref-columns="IdTipo" update-rule="0" delete-rule="0" deferrability="2"/>
+      <exported-key name="fk_Cotizaciones_Cliente1" table="Cotizaciones" schema="" catalog="SIGCO" columns="IdClienteCotizaciones"/>
+      <exported-key name="fk_Asesorias_Empresas1" table="Gestiones" schema="" catalog="SIGCO" columns="NitClienteGestiones"/>
+      <index name="Nit_UNIQUE" unique="true" columns="Nit"/>
+      <index name="fk_Clientes_ActividadesEmpresas1_idx" unique="false" columns="IdActividadCliente"/>
+      <index name="fk_Clientes_Ciudades1_idx" unique="false" columns="IdLugarCliente"/>
+      <index name="fk_Clientes_Clasificaciones1_idx" unique="false" columns="IdClasificacionCliente"/>
+      <index name="fk_Clientes_Personas_idx" unique="false" columns="CedulaCliente"/>
+      <index name="fk_Clientes_TiposEmpresas1_idx" unique="false" columns="IdTipoCliente"/>
+    </table>
+    <table name="Cotizaciones" schema="" catalog="SIGCO" type="TABLE">
+      <column name="IdCotizacion" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="EstadoCotización" sqlType="ENUM" precision="9" scale="0" nullable="false" jdbcType="1"/>
+      <column name="FechaCreacionCotizacion" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <column name="ValorTotalCotizacion" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="ObservacionesCotizacion" sqlType="VARCHAR" precision="200" scale="0" nullable="false" jdbcType="12"/>
+      <column name="DescuentoIvaXCliente" sqlType="ENUM" precision="3" scale="0" nullable="false" jdbcType="1"/>
+      <column name="IdUsuarioCotizaciones" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="IdClienteCotizaciones" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="IdCotizacion"/>
+      <foreign-key name="fk_Cotizaciones_Cliente1" columns="IdClienteCotizaciones" ref-table="Clientes" ref-schema="" ref-catalog="SIGCO" ref-columns="Nit" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="fk_Cotizaciones_Usuarios1" columns="IdUsuarioCotizaciones" ref-table="Empleados" ref-schema="" ref-catalog="SIGCO" ref-columns="CedulaEmpleado" update-rule="0" delete-rule="0" deferrability="2"/>
+      <exported-key name="fk_CotizacionDetalles_Cotizaciones1" table="DetallesCotizacion" schema="" catalog="SIGCO" columns="IdCotizacionDetallesCotizacion"/>
+      <exported-key name="fk_OrdenDeCompra_Cotizaciones1" table="OrdenesDeCompra" schema="" catalog="SIGCO" columns="IdCotizacionOrdenesCompra"/>
+      <index name="fk_Cotizaciones_Cliente1_idx" unique="false" columns="IdClienteCotizaciones"/>
+      <index name="fk_Cotizaciones_Usuarios1_idx" unique="false" columns="IdUsuarioCotizaciones"/>
+    </table>
+    <table name="DetallesCotizacion" schema="" catalog="SIGCO" type="TABLE">
+      <column name="IdCotizacionDetallesCotizacion" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="IdProductoDetallesCotizacion" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="CantidadProductos" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="ValorIva" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="TotalDetalle" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="IdCotizacionDetallesCotizacion,IdProductoDetallesCotizacion"/>
+      <foreign-key name="fk_CotizacionDetalles_Cotizaciones1" columns="IdCotizacionDetallesCotizacion" ref-table="Cotizaciones" ref-schema="" ref-catalog="SIGCO" ref-columns="IdCotizacion" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="fk_CotizacionDetalles_Productos1" columns="IdProductoDetallesCotizacion" ref-table="Productos" ref-schema="" ref-catalog="SIGCO" ref-columns="IdProducto" update-rule="0" delete-rule="0" deferrability="2"/>
+      <index name="fk_CotizacionDetalles_Cotizaciones1_idx" unique="false" columns="IdCotizacionDetallesCotizacion"/>
+      <index name="fk_CotizacionDetalles_Productos1_idx" unique="false" columns="IdProductoDetallesCotizacion"/>
+    </table>
+    <table name="Empleados" schema="" catalog="SIGCO" type="TABLE">
+      <column name="IdEmpleado" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="CedulaEmpleado" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Cargo" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="IdEmpleado"/>
+      <foreign-key name="fk_Empleados_Personas" columns="CedulaEmpleado" ref-table="Personas" ref-schema="" ref-catalog="SIGCO" ref-columns="CedulaPersona" update-rule="0" delete-rule="0" deferrability="2"/>
+      <exported-key name="fk_Cotizaciones_Usuarios1" table="Cotizaciones" schema="" catalog="SIGCO" columns="IdUsuarioCotizaciones"/>
+      <exported-key name="fk_Asesorias_Usuarios1" table="Gestiones" schema="" catalog="SIGCO" columns="CedulaEmpleadoGestiones"/>
+      <exported-key name="fk_MetasUsuario_Usuarios1" table="MetasUsuarios" schema="" catalog="SIGCO" columns="CedulaMetasUsuarios"/>
+      <index name="Cedula_UNIQUE" unique="true" columns="CedulaEmpleado"/>
+    </table>
+    <table name="Gestiones" schema="" catalog="SIGCO" type="TABLE">
+      <column name="IdGestion" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="CedulaEmpleadoGestiones" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="NitClienteGestiones" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="FechaProgramada" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="EstadoGestiones" sqlType="ENUM" precision="10" scale="0" nullable="false" jdbcType="1"/>
+      <column name="TipoGestiones" sqlType="ENUM" precision="12" scale="0" nullable="false" jdbcType="1"/>
+      <column name="Asunto" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Asistentes" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="ObservacionesGestiones" sqlType="VARCHAR" precision="200" scale="0" nullable="false" jdbcType="12"/>
+      <column name="LugarGestiones" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="IdGestion"/>
+      <foreign-key name="fk_Asesorias_Empresas1" columns="NitClienteGestiones" ref-table="Clientes" ref-schema="" ref-catalog="SIGCO" ref-columns="Nit" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="fk_Asesorias_Usuarios1" columns="CedulaEmpleadoGestiones" ref-table="Empleados" ref-schema="" ref-catalog="SIGCO" ref-columns="CedulaEmpleado" update-rule="0" delete-rule="0" deferrability="2"/>
+      <index name="fk_Asesorias_Empresas1_idx" unique="false" columns="NitClienteGestiones"/>
+      <index name="fk_Asesorias_Usuarios1_idx" unique="false" columns="CedulaEmpleadoGestiones"/>
+    </table>
+    <table name="Impuestos" schema="" catalog="SIGCO" type="TABLE">
+      <column name="IdIva" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="PorcentajeIva" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="IdIva"/>
+      <exported-key name="fk_Productos_Impuestos" table="Productos" schema="" catalog="SIGCO" columns="IdIvaProductos"/>
+    </table>
+    <table name="Lugares" schema="" catalog="SIGCO" type="TABLE">
+      <column name="IdLugar" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="NombreLugar" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="IdLugar"/>
+      <exported-key name="fk_Clientes_Ciudades1" table="Clientes" schema="" catalog="SIGCO" columns="IdLugarCliente"/>
+    </table>
+    <table name="Metas" schema="" catalog="SIGCO" type="TABLE">
+      <column name="IdMeta" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Tipo" sqlType="ENUM" precision="7" scale="0" nullable="false" jdbcType="1"/>
+      <column name="CantidadValor" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="FechaInicio" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="FechaFin" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <primary-key name="PRIMARY" columns="IdMeta"/>
+      <exported-key name="fk_MetasUsuario_Metas1" table="MetasUsuarios" schema="" catalog="SIGCO" columns="IdMetaMetasUsuarios"/>
+    </table>
+    <table name="MetasUsuarios" schema="" catalog="SIGCO" type="TABLE">
+      <column name="CedulaMetasUsuarios" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="IdMetaMetasUsuarios" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="CedulaMetasUsuarios,IdMetaMetasUsuarios"/>
+      <foreign-key name="fk_MetasUsuario_Metas1" columns="IdMetaMetasUsuarios" ref-table="Metas" ref-schema="" ref-catalog="SIGCO" ref-columns="IdMeta" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="fk_MetasUsuario_Usuarios1" columns="CedulaMetasUsuarios" ref-table="Empleados" ref-schema="" ref-catalog="SIGCO" ref-columns="CedulaEmpleado" update-rule="0" delete-rule="0" deferrability="2"/>
+      <index name="fk_MetasUsuario_Metas1_idx" unique="false" columns="IdMetaMetasUsuarios"/>
+      <index name="fk_MetasUsuario_Usuarios1_idx" unique="false" columns="CedulaMetasUsuarios"/>
+    </table>
+    <table name="OrdenesDeCompra" schema="" catalog="SIGCO" type="TABLE">
+      <column name="IdOrden" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="IdCotizacionOrdenesCompra" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="EstadoOrdenCompra" sqlType="ENUM" precision="10" scale="0" nullable="false" jdbcType="1"/>
+      <column name="FechaElaboracionOrdenCompra" sqlType="TIMESTAMP" precision="19" scale="0" nullable="false" jdbcType="93" def="Q1VSUkVOVF9USU1FU1RBTVA=" version="true"/>
+      <column name="TotalCotizacionOrdenCompra" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="DescuentoTotal" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="GranTotal" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="ObservacionesOrdenCompra" sqlType="VARCHAR" precision="200" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="IdOrden"/>
+      <foreign-key name="fk_OrdenDeCompra_Cotizaciones1" columns="IdCotizacionOrdenesCompra" ref-table="Cotizaciones" ref-schema="" ref-catalog="SIGCO" ref-columns="IdCotizacion" update-rule="0" delete-rule="0" deferrability="2"/>
+      <index name="IdCotizacion_UNIQUE" unique="true" columns="IdCotizacionOrdenesCompra"/>
+      <index name="fk_OrdenDeCompra_Cotizaciones1_idx" unique="false" columns="IdCotizacionOrdenesCompra"/>
+    </table>
+    <table name="Permisos" schema="" catalog="SIGCO" type="TABLE">
+      <column name="IdPermiso" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Url" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="NombrePagina" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="IdCategoria" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="IdPermiso"/>
+      <exported-key name="fk_RolesPermisos_Permisos1" table="PermisosRoles" schema="" catalog="SIGCO" columns="IdPermisoPermisosRoles"/>
+    </table>
+    <table name="PermisosCategorias" schema="" catalog="SIGCO" type="TABLE">
+      <column name="IdCategoria" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Nombre" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Icono" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+    </table>
+    <table name="PermisosRoles" schema="" catalog="SIGCO" type="TABLE">
+      <column name="IdPermisoPermisosRoles" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="IdRolPermisosRoles" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="IdPermisoPermisosRoles,IdRolPermisosRoles"/>
+      <foreign-key name="fk_RolesPermisos_Permisos1" columns="IdPermisoPermisosRoles" ref-table="Permisos" ref-schema="" ref-catalog="SIGCO" ref-columns="IdPermiso" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="fk_RolesPermisos_Roles1" columns="IdRolPermisosRoles" ref-table="Roles" ref-schema="" ref-catalog="SIGCO" ref-columns="IdRol" update-rule="0" delete-rule="0" deferrability="2"/>
+      <index name="fk_RolesPermisos_Permisos1_idx" unique="false" columns="IdPermisoPermisosRoles"/>
+      <index name="fk_RolesPermisos_Roles1_idx" unique="false" columns="IdRolPermisosRoles"/>
+    </table>
+    <table name="Personas" schema="" catalog="SIGCO" type="TABLE">
+      <column name="IdPersona" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="CedulaPersona" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="Nombres" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Apellidos" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="EmailPersona" sqlType="VARCHAR" precision="70" scale="0" nullable="false" jdbcType="12"/>
+      <column name="EstadoPersona" sqlType="ENUM" precision="8" scale="0" nullable="false" jdbcType="1"/>
+      <column name="Contrasenia" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="RutaImagenPersona" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="CelularPersona" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="IdPersona"/>
+      <exported-key name="fk_Clientes_Personas" table="Clientes" schema="" catalog="SIGCO" columns="CedulaCliente"/>
+      <exported-key name="fk_Empleados_Personas" table="Empleados" schema="" catalog="SIGCO" columns="CedulaEmpleado"/>
+      <exported-key name="fk_RolUsiario_Personas" table="RolesUsuarios" schema="" catalog="SIGCO" columns="CedulaRolesUsuarios"/>
+      <index name="Cedula_UNIQUE" unique="true" columns="CedulaPersona"/>
+    </table>
+    <table name="Presentaciones" schema="" catalog="SIGCO" type="TABLE">
+      <column name="IdPresentacion" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="NombrePresentacion" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="IdPresentacion"/>
+      <exported-key name="fk_Productos_Presentacion1" table="Productos" schema="" catalog="SIGCO" columns="IdPresentacionProductos"/>
+    </table>
+    <table name="Productos" schema="" catalog="SIGCO" type="TABLE">
+      <column name="IdProducto" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="NombreProducto" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="DescripcionProducto" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <column name="IdIvaProductos" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="ValorBase" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="IdPresentacionProductos" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="IdCategoriaProductos" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="EstadoProductos" sqlType="ENUM" precision="8" scale="0" nullable="false" jdbcType="1"/>
+      <column name="rutaImagen" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="IdProducto"/>
+      <foreign-key name="fk_Productos_CategoriaProducto1" columns="IdCategoriaProductos" ref-table="CategoriasProductos" ref-schema="" ref-catalog="SIGCO" ref-columns="IdCategoria" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="fk_Productos_Impuestos" columns="IdIvaProductos" ref-table="Impuestos" ref-schema="" ref-catalog="SIGCO" ref-columns="IdIva" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="fk_Productos_Presentacion1" columns="IdPresentacionProductos" ref-table="Presentaciones" ref-schema="" ref-catalog="SIGCO" ref-columns="IdPresentacion" update-rule="0" delete-rule="0" deferrability="2"/>
+      <exported-key name="fk_CotizacionDetalles_Productos1" table="DetallesCotizacion" schema="" catalog="SIGCO" columns="IdProductoDetallesCotizacion"/>
+      <index name="fk_Productos_CategoriaProducto1_idx" unique="false" columns="IdCategoriaProductos"/>
+      <index name="fk_Productos_Impuestos_idx" unique="false" columns="IdIvaProductos"/>
+      <index name="fk_Productos_Presentacion1_idx" unique="false" columns="IdPresentacionProductos"/>
+    </table>
+    <table name="Roles" schema="" catalog="SIGCO" type="TABLE">
+      <column name="IdRol" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="NombreRol" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="IdRol"/>
+      <exported-key name="fk_RolesPermisos_Roles1" table="PermisosRoles" schema="" catalog="SIGCO" columns="IdRolPermisosRoles"/>
+      <exported-key name="fk_RolUsuario_Roles1" table="RolesUsuarios" schema="" catalog="SIGCO" columns="IdRolRolesUsuarios"/>
+    </table>
+    <table name="RolesUsuarios" schema="" catalog="SIGCO" type="TABLE">
+      <column name="IdRolRolesUsuarios" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="CedulaRolesUsuarios" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="IdRolRolesUsuarios,CedulaRolesUsuarios"/>
+      <foreign-key name="fk_RolUsiario_Personas" columns="CedulaRolesUsuarios" ref-table="Personas" ref-schema="" ref-catalog="SIGCO" ref-columns="CedulaPersona" update-rule="0" delete-rule="0" deferrability="2"/>
+      <foreign-key name="fk_RolUsuario_Roles1" columns="IdRolRolesUsuarios" ref-table="Roles" ref-schema="" ref-catalog="SIGCO" ref-columns="IdRol" update-rule="0" delete-rule="0" deferrability="2"/>
+      <index name="fk_RolUsiario_Personas_idx" unique="false" columns="CedulaRolesUsuarios"/>
+      <index name="fk_RolUsuario_Roles1_idx" unique="false" columns="IdRolRolesUsuarios"/>
+    </table>
+    <table name="Temas" schema="" catalog="SIGCO" type="TABLE">
+      <column name="IdTema" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="NombreTema" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="IdTema"/>
+    </table>
+    <table name="TiposEmpresas" schema="" catalog="SIGCO" type="TABLE">
+      <column name="IdTipo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="NombreTipo" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="IdTipo"/>
+      <exported-key name="fk_Clientes_TiposEmpresas1" table="Clientes" schema="" catalog="SIGCO" columns="IdTipoCliente"/>
+    </table>
+    <procedure name="completeGestion" schema="" catalog="sigco" type="1">
+      <prototype>
+        <parameter name="paramId" sqlType="INT " precision="10" scale="0" nullable="true" jdbcType="1111" type="1" index="1"/>
+      </prototype>
+    </procedure>
+    <procedure name="crearGestion" schema="" catalog="sigco" type="1">
+      <prototype>
+        <parameter name="ParamTipoGestiones" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12" type="1" index="1"/>
+        <parameter name="ParamAsunto" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12" type="1" index="2"/>
+        <parameter name="ParamAsistentes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" type="1" index="3"/>
+        <parameter name="ParamObservacionesGestiones" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12" type="1" index="4"/>
+        <parameter name="ParamLugarGestiones" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12" type="1" index="5"/>
+        <parameter name="ParamFechaProgramada" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91" type="1" index="6"/>
+        <parameter name="ParamNitClienteGestiones" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" type="1" index="7"/>
+        <parameter name="ParamCedulaEmpleadoGestiones" sqlType="INT " precision="10" scale="0" nullable="true" jdbcType="1111" type="1" index="8"/>
+      </prototype>
+    </procedure>
+    <procedure name="listarGestion" schema="" catalog="sigco" type="1">
+      <prototype>
+        <parameter name="paramIdUser" sqlType="INT " precision="10" scale="0" nullable="true" jdbcType="1111" type="1" index="1"/>
+      </prototype>
+    </procedure>
+    <procedure name="modificarGestion" schema="" catalog="sigco" type="1">
+      <prototype>
+        <parameter name="ParamCedulaEmpleadoGestiones" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" type="1" index="1"/>
+        <parameter name="ParamNitClienteGestiones" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" type="1" index="2"/>
+        <parameter name="ParamEstadoGestiones" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12" type="1" index="3"/>
+        <parameter name="ParamAsunto" sqlType="VARCHAR" precision="50" scale="0" nullable="true" jdbcType="12" type="1" index="4"/>
+        <parameter name="paramAsistentes" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" type="1" index="5"/>
+        <parameter name="ParamObservacionesGestiones" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12" type="1" index="6"/>
+        <parameter name="ParamLugarGestiones" sqlType="VARCHAR" precision="200" scale="0" nullable="true" jdbcType="12" type="1" index="7"/>
+        <parameter name="ParamFechaProgramada" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91" type="1" index="8"/>
+        <parameter name="ParamTipoVisita" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12" type="1" index="9"/>
+        <parameter name="ParamIdGestion" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" type="1" index="10"/>
+      </prototype>
+    </procedure>
+    <procedure name="obtenerEmpresaById" schema="" catalog="sigco" type="1">
+      <prototype>
+        <parameter name="idProducto" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" type="1" index="1"/>
+      </prototype>
+    </procedure>
+    <procedure name="obtenerEmpresas" schema="" catalog="sigco" type="1"/>
+    <procedure name="obtenerProductoById" schema="" catalog="sigco" type="1">
+      <prototype>
+        <parameter name="idProducto" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4" type="1" index="1"/>
+      </prototype>
+    </procedure>
+  </data-source>
+</component>
