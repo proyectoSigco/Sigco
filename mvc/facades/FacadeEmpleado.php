@@ -46,6 +46,9 @@ public function comprobarUsuario($user,$pass){
         return $this->objDao->datosLogin($user,$this->con);
     }
 }
+    public function verificarExistencia($user){
+        return $this->objDao->verificar($user,$this->con);
+    }
 
 public function obtenerMenu($rol){
 return $this->objDao->obtenerTitulos($rol,$this->con);
@@ -71,6 +74,10 @@ return $this->objDao->obtenerTitulos($rol,$this->con);
 
   public function cambiarEstado($user,$estado){
         return $this->objDao->cambiarEstado($user,$estado,$this->con);
+  }
+
+  public function cambiarClave($clave,$user){
+    return $this->objDao->cambiarClave($user,$clave,$this->con);
   }
 
 

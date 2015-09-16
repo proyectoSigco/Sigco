@@ -112,6 +112,27 @@ class EmpleadoDao {
         }
     }
 
+    public function verificar($user,PDO $cnn){
+        try {
+            $query = $cnn->prepare('SELECT count(*) as "existe" FROM Personas WHERE CedulaPersona=?');
+            $query->bindParam(1, $user);
+            $query->execute();
+            $resul=$query->fetch();
+            if ($resul['existe']==0){
+                return false;
+            }else{
+                $correo= $cnn->prepare("Select EmailPersona as 'mail' from Personas where CedulaPersona=?");
+                $correo->bindParam(1,$user);
+                $correo->execute();
+                return $correo->fetch();
+            }
+        } catch (Exception $ex) {
+            echo 'Error' . $ex->getMessage();
+        }
+        $cnn=null;
+
+    }
+
     public function login($user,$pass,PDO $cnn){
         try {
             $query = $cnn->prepare('SELECT count(*) as "existe" FROM Personas WHERE CedulaPersona=? AND Contrasenia=?');
@@ -219,6 +240,21 @@ where PermisosRoles.IdRolPermisosRoles=? group by PermisosCategorias.IdCategoria
             $query2->execute();
 
             return "El empleado ahora se encuentra ".$estado;
+        } catch (Exception $ex) {
+            $mensaje = $ex->getMessage();
+        }
+        $cnn=null;
+        return $mensaje;
+    }
+
+    public function cambiarClave($user,$pass,PDO $cnn) {
+        $mensaje = "";
+        try {
+            $query2= $cnn->prepare("Update Personas set Contrasenia=? where CedulaPersona=?");
+            $query2->bindParam(1,md5($pass));
+            $query2->bindParam(2,$user);
+            $query2->execute();
+            return true;
         } catch (Exception $ex) {
             $mensaje = $ex->getMessage();
         }
