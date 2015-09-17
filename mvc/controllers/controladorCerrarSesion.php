@@ -6,7 +6,7 @@
  * Time: 12:22 AM
  */
 session_start();
-session_unset('datosLogin');
-session_unset('rol');
+unset($_SESSION['datosLogin']);
+unset($_SESSION['rol']);
 session_destroy();
 header('location: ../../index.php');

@@ -6,7 +6,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <?php
 include_once'../models/ProductosCotizados.php';
 session_start();
-if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['datosLogin'])){
+if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="Inactivo") /*|| $_SESSION['rol']['rol']!=3)*/{
     header('location: Invalido.php');
 }
 $cliente=$_GET['idcliente'];

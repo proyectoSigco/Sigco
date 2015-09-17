@@ -31,7 +31,7 @@
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg">Inicie sesión para ingresar</p>
-        <form action="mvc/controllers/controladorLogin.php" method="post">
+        <form action="mvc/controllers/controladorLogin.php?login=true" method="post">
           <div class="form-group has-feedback">
             <input type="text" class="form-control" placeholder="Usuario" name="email" />
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -56,9 +56,6 @@
 
         <?php
         if (isset($_GET['login'])){
-            if (isset($_SESSION['datosLogion'])){
-            session_destroy();
-            }
           ?>
           <script type="text/javascript">
               swal({   title: "Datos de ingreso invalidos",   text: "Por favor intentelo de nuevo",   type: "error",   showCancelButton: false,   confirmButtonColor: "#1B0092",   confirmButtonText: "Regresar",   closeOnConfirm: true }, function(){ });
@@ -66,22 +63,41 @@
           <?php
         }
         ?>
+
+          <?php
+          if (isset($_GET['correo'])){
+          ?>
+          <script type="text/javascript">
+              swal({   title: "Usuario inválido",   text: "El usuario no existe, verifique e intente de nuevo",   type: "error",   showCancelButton: false,   confirmButtonColor: "#1B0092",   confirmButtonText: "Regresar",   closeOnConfirm: true }, function(){ });
+          </script>
+          <?php
+          }
+          ?>
+
+          <?php
+          if (isset($_GET['sent'])){
+              if ($_GET['sent']==false){
+                  ?>
+                  <script type="text/javascript">
+                      swal({   title: "ERROR",   text: "No se proceso la solicitud, intentelo de nuevo o contacte al administrador",   type: "error",   showCancelButton: false,   confirmButtonColor: "#1B0092",   confirmButtonText: "Regresar",   closeOnConfirm: true }, function(){ });
+                  </script>
+                  <?php
+
+
+              }else{
+          ?>
+          <script type="text/javascript">
+              swal({   title: "Restablecer contraseña",   text: "Por favor siga las instruccines enviadas a su correo electrónico",   type: "info",   showCancelButton: false,   confirmButtonColor: "#1B0092",   confirmButtonText: "Regresar",   closeOnConfirm: true }, function(){ });
+          </script>
+          <?php
+          }}
+          ?>
         <a href="#modal1">Olvidé mi contraseña</a><br>
 
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->
 <style>
 
-    .center{
-        position:absolute;
-        width:700px;
-        height:600px;
-        top:50%;
-        left:50%;
-        margin-left:-350px;
-        margin-top:-250px;
-
-    }
 
     .modalmask {
         position: fixed;
@@ -143,14 +159,31 @@
         background: #FAAC58;
         color:#222;
     }
+
 </style>
     <div id="modal1" class="modalmask">
         <div class="modalbox movedown">
             <a href="#close" title="Close" class="close">X</a>
-            
+            <div class="login-box-body">
+                <div class="login-logo">
+                    <a ><b>Restablecer contraseña</b></a>
+                </div>
+                <h4 class="login-box-msg">Por favor ingrese su usuario</h4>
+                <form action="mvc/controllers/controladorLogin.php?forget=true" method="post">
+                    <div class="form-group has-feedback">
+                        <input type="text" class="form-control" placeholder="Usuario" name="usuario" required />
+                        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                    </div>
+
+                    <div class="col-md-12 text-center">
+                        <button id="test" type="submit" class="btn btn-primary">Restablecer Contraseña</button>
+                        </div>
+                </form>
+                <br><br>
+</div>
+
             </div>
     </div>
-
     <!-- jQuery 2.1.4 -->
     <script src="plugins/jQuery/jQuery-2.1.4.min.js" type="text/javascript"></script>
     <!-- Bootstrap 3.3.2 JS -->
