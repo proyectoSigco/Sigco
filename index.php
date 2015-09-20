@@ -3,7 +3,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Sigco | Iniciar sesión validar</title>
+    <title>Sigco | Iniciar sesión</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
@@ -49,7 +49,7 @@
               </div>
             </div><!-- /.col -->
             <div class="col-xs-4">
-              <button type="submit" class="btn btn-block btn-primary">Entrar</button>
+              <button type="submit" class="btn btn-block btn-primary">Ingresar</button>
             </div><!-- /.col -->
           </div>
         </form>
