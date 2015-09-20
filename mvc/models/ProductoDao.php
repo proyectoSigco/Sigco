@@ -41,15 +41,14 @@ class ProductoDao  {
             }
             catch(Exception $ex){
                 $this->mensaje=$ex->getMessage();
-                print_r($productoDto);
             }
             $cnn=null;
             return $this->mensaje;
             }
          public function listarProductos(PDO $cnn){
-             $state='Cancelado';
+
              try {
-                 $query = $cnn->prepare('SELECT * FROM SIGCO.Productos ');
+                 $query = $cnn->prepare('SELECT * FROM SIGCO.Productos where Productos.EstadoProductos="Activo" ');
                  $query->execute();
                 return $query->fetchAll();
 
@@ -63,7 +62,7 @@ class ProductoDao  {
 
     public function obtenerProducto($id,PDO $cnn){
         try {
-            $query = $cnn->prepare('select * from  Productos join Impuestos on Impuestos.Idiva=Productos.IdIvaProductos where IdProducto=?');
+            $query = $cnn->prepare('select * from  Productos where EstadoProductos="Activo" and IdProducto=?');
             $query->bindParam(1,$id);
             $query->execute();
             return $query->fetch();
@@ -76,16 +75,17 @@ class ProductoDao  {
     }
 
         public function cancelarProducto($idProducto,PDO $cnn){
-            $cancelar='Cancelado';
+            $cancelar='Inactivo';
             try{
-                $query=$cnn->prepare('UPDATE productos  SET Estado=?  where IdProducto=?');
+                $query=$cnn->prepare('UPDATE Productos  SET EstadoProductos=?  where IdProducto=?');
                 $query->bindParam(1,$cancelar);
                 $query->bindParam(2,$idProducto);
                 $query->execute();
-                return $this->mensaje='Producto Eliminado';
+                $this->mensaje='Producto Eliminado';
             }catch (Exception $ex){
-                print $ex->getMessage();
+                $this->mensaje=$ex->getMessage().' No se esta eliminando';
             }
+            return $this->mensaje;
         }
     public function  obtenerPresentacionProducto(PDO $cnn){
         try {
@@ -129,9 +129,9 @@ class ProductoDao  {
         }
         $cnn=null;
     }
-    public function  searchProduct($criteria,PDO $cnn){
+    public function  buscarProducto($criteria,PDO $cnn){
         try {
-            $query = $cnn->prepare('select * from Productos where IdProducto= "'.$criteria.'" or NombreProducto like "%'.$criteria.'%" or DescripcionProducto like "%'.$criteria.'%" ');
+            $query = $cnn->prepare('select * from Productos where EstadoProductos="Activo" and (IdProducto= "'.$criteria.'" or NombreProducto like "%'.$criteria.'%" or DescripcionProducto like "%'.$criteria.'%") ');
             $query->execute();
             return $query->fetchAll();
         } catch(Exception $ex){
@@ -141,5 +141,38 @@ class ProductoDao  {
     }
 
 
+    public function buscarProductoCriterio($criterio, $busqueda, $comobuscar,PDO $cnn){
+        switch ($comobuscar) {
+            case 1:
+                try{
+                    $query = $cnn->prepare("Select * from Productos
+                                            where $criterio='$busqueda' ");
+                    $query->execute();
+                    if(isset($_SESSION['conteo'])) {
+                        $_SESSION['conteo'] = $query->rowCount();
+                    }
+                    return $query->fetchAll();
+                } catch (Exception $ex){
+                    echo '&ex='.$ex->getMessage().'&encontrados=0';
+                };
+                break;
+
+            case 2:
+                try{
+                    $query = $cnn->prepare("Select * from Productos
+                                            where $criterio like '%$busqueda%' ");
+                    $query->execute();
+                    if(isset($_SESSION['conteo'])) {
+                        $_SESSION['conteo'] = $query->rowCount();
+                    }
+                    return $query->fetchAll();
+                } catch (Exception $ex){
+                    echo '&ex='.$ex->getMessage().'&encontrados=0';
+                };
+
+                break;
+        }
+
+    }
 
 }

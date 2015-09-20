@@ -5,7 +5,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <?php
 session_start();
-if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="Inactivo") /*|| $_SESSION['rol']['rol']!=3)*/{
+if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['datosLogin'])){
     header('location: Invalido.php');
 }
 ?>
@@ -37,7 +37,8 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
     <script type="text/javascript" src="../../plugins/formvalidation/framework/bootstrap.js"></script>
     <script type="text/javascript" src="../../plugins/formvalidation/language/es_ES.js"></script>
 
-
+    <link href="../../plugins/animate/animate.css" rel="stylesheet" type="text/css"/>
+    <script src="../../plugins/messajes/jquery.noty.packaged.min.js"></script>
 
     <link rel="stylesheet" href="../../date/jquery-ui.css">
   <script src="../../date/jquery-ui.js"></script>
@@ -201,34 +202,131 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
                 <form action="../controllers/ControladorProducto.php" method="post">
                     <div class="row">
 
-                        <div class="col-lg-6">
-                            <div class="input-group">
-
-                                <input type="text" class="form-control" value="<?php if(isset($_GET['resultado'])){  echo $_GET['resultado']; } ?>" name="searchProduct" placeholder="buscar...">
-                                  <span class="input-group-btn">
-                                    <button class="btn btn-primary" name="search" type="submit"><i class="fa fa-search "></i> buscar</button>
-                                  </span>
-
-                            </div><!-- /input-group -->
-                        </div><!-- /.col-lg-6 -->
                     </div><!-- /.row -->
                 </form>
             </section>
 
+
             <!-- Main content -->
             <section class="content">
                 <!-- Horizontal Form -->
+
                 <div class="row">
                     <div class="col-md-10">
+                        <div class="box">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Opciones de búsqueda</h3>
+                            </div><!-- /.box-header -->
+                            <div class="box-body">
+
+
+                                <form role="form" action="../controllers/ControladorProducto.php?buscar=true" method="post">
+
+                                    <div class="form-group">
+                                        <label for="criterio">Seleccione un criterio de búsqueda*</label>
+                                        <select class="form-control select2" name="criterio" id="criterio" required tabindex="1" autofocus>
+                                            <option value="Gestiones.IdProducto" selected>Código de Producto</option>
+                                            <option value="Gestiones.NombreProducto" >Nombre Producto</option>
+                                            <option value="Gestiones.ValorBase">Precio Producto</option>
+                                        </select>
+                                    </div>
+
+                                    <label for="comobuscar" class="margin">¿Qué desea encontrar?*</label>
+                                    <div class="input-group input-group-sm margin">
+                                        <div class="input-group-btn">
+                                            <select name="comobuscar" id="comobuscar" class="btn btn-default dropdown-toggle" data-toggle="dropdown" tabindex="2">
+                                                <option selected value="1">Una búsqueda exacta de</option>
+                                                <option value="2">Cualquier coincidencia de</option>
+                                            </select>
+                                        </div><!-- /btn-group -->
+                                        <input type="text" name="busqueda" class="form-control" placeholder="Número Nit | Razón Social | Lugar" required tabindex="3">
+                    <span class="input-group-btn">
+                      <button class="btn btn-info btn-flat" type="submit" tabindex="4">Buscar Producto</button>
+                    </span>
+                                    </div><!-- /input-group -->
+
+                                </form>
+
+                            </div>
+                            <div class="modal fade" id="myModal">
+                                <div class="modal-dialog" >
+                                    <div class="modal-content" style="border-radius: 5px;">
+                                        <div class="modal-header"   style="background-color: #3c8dbc;border-radius: 5px 5px 0px 0px;color:#FFF;text-align: center">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 id="title" class="modal-title">Detalle de Producto</h4>
+                                        </div>
+
+                                        <div class="modal-body">
+
+                                                <table class="pull-left col-md-8" >
+                                                    <table class="pull-left col-md-8 ">
+                                                        <tbody>
+                                                        <tr>
+                                                            <td ><strong >Código</strong></td>
+                                                            <td> </td>
+                                                            <td id="codigo" >02051</td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td ><strong >Nombre del Producto</strong></td>
+                                                            <td> </td>
+                                                            <td id="nombre">descrição do produto</td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td ><strong>Presentación</strong></td>
+                                                            <td> </td>
+                                                            <td id="presentacion">Marca do produto</td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td ><strong>Categoria</strong></td>
+                                                            <td> </td>
+                                                            <td id="category">0230316</td>
+                                                        </tr>
+
+                                                        <td><strong>Precio Unitario</strong></td>
+                                                            <td> </td>
+                                                            <td id="price">R$ 35,00</td>
+                                                        </tr>
+
+                                                        </tbody>
+                                                </table>
+                                                <div class="col-md-4">
+                                                    <img class="img-thumbnail" id="image" src="../images/55e920f1d7044placeholder.png" alt=""/>
+                                                </div>
+                                                <div class="clearfix">
+                                                    <p>Descripción</p>
+                                                    <p class="info_open" id="description"> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                                                </div>
+
+                                            <!--<p><input type="text" class="input-sm" id="txtfname"/></p>
+                                            <p><input type="text" class="input-sm" id="txtlname"/></p>-->
+                                        </div>
+
+                                            <div class="modal-footer">
+
+                                                <div class="text-right pull-right col-md-3">
+                                                    Precio: <br>
+                                                    <span class="h3 text-muted"><strong id="precioU">R$35,00</strong></span>
+                                                </div>
+
+                                            </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div><!-- /.modal -->
+                        </div>
+
                         <div class="box box-info">
                             <div class="box-header with-border">
+
                                 <p>
 
                                 <h2 class="box-title">Listado de Productos </h2></p>
 
                                 <!-- /.box-header -->
 
-                                <table id="example" class="table table-bordered table-hover">
+
                                     <thead>
                                     <tr>
                                         <th></th>
@@ -253,15 +351,18 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
                                                     <li class="span4">
                                                         <div class="thumbnail" style="text-align: center">
                                                             <span
-                                                                class="badge badge-inverse pull-right price">$<?php echo $iterator['ValorBase']; ?></span>
+
+                                                                class="badge badge-inverse pull-right price"><?php setlocale(LC_MONETARY, 'en_US.UTF-8'); echo money_format('%.2n',$iterator['ValorBase']); ?></span>
                                                             <?php if (!strpos($iterator['rutaImagen'], 'sinImagen.jpg') !== false) { ?>
-                                                                <img src="<?php echo $iterator['rutaImagen'] ?>"
+                                                                <img class="detail" src="<?php echo $iterator['rutaImagen'] ?>"
                                                                      alt="Unicorn Flux" class="img-responsive">
                                                             <?php } else { ?>
                                                                 <img src="../images/55e920f1d7044placeholder.png"
                                                                      alt="Unicorn Flux" class="img-responsive">
                                                             <?php } ?>
+                                                            <div>
                                                             <h3 class="clearfix">
+
                                                               <span class="pull-left">
                                                                 <?php echo $iterator['NombreProducto'] ?>
                                                                   <small><?php echo $producto->presentacionId($iterator['IdPresentacionProductos'])['NombrePresentacion']; ?></small>
@@ -269,30 +370,31 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
 
 
                                                             </h3>
+
                                                             <p>
                                                                 <?php echo $iterator['DescripcionProducto'] ?>
                                                             </p>
-
+                                                            </div>
                                                             <div class="clearfix">
-
-                                                                <a href="../views/ModificarProducto.php?id=<?php echo $iterator['IdProducto']; ?>">
-                                                                    <button class="btn btn-primary "><i
+                                                                <?php if($_SESSION['datosLogin']['NombreRol']=='Coordinador') {?>
+                                                                <a href="../views/ModificarProducto.php?id=<?php echo $iterator['IdProducto']; ?>"  >
+                                                                    <button class="btn btn-primary btn-xs "><i
                                                                             class="fa fa-pencil"></i></button>
                                                                 </a>
-                                                                <a href="../views/ModificarProducto.php?id=<?php echo $iterator['IdProducto']; ?>">
-                                                                    <button class="btn btn-danger "><i
-                                                                            class="fa fa-trash"></i></button>
-                                                                </a>
-                                                                <a href="../views/ModificarProducto.php?id=<?php echo $iterator['IdProducto']; ?>">
-                                                                    <button class="btn btn-warning "><i
-                                                                            class="fa fa-eye"></i></button>
-                                                                </a>
+
+                                                                    <button class="btn btn-danger btn-xs click"   value="<?php echo $iterator['IdProducto']; ?>"><i
+                                                                            class="fa fa-trash "></i>
+                                                                    </button>
+                                                                <?php }?>
+                                                                    <button class="btn btn-warning  btn-xs detail " value="<?php echo $iterator['IdProducto']; ?>">
+                                                                    <i class="fa fa-eye "></i>
+                                                                    </button>
+
 
                                                             </div>
                                                         </div>
                                                     </li>
                                                 </ul>
-                                            </td>
 
                                     <?php
                                     }?>
@@ -305,7 +407,7 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
                                     </tr>
                                     </tfoot>
 
-                                </table>
+
 
 
                                 <!-- /content-panel -->
@@ -340,6 +442,7 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
     <script src="../../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- AdminLTE App -->
     <script src="../../dist/js/app.min.js" type="text/javascript"></script>
+    <script src="../../plugins/Moneyformat/money.js"></script>
 
     <!-- Optionally, you can add Slimscroll and FastClick plugins.
           Both of these plugins are recommended to enhance the
@@ -347,9 +450,10 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
           fixed layout. -->
   </body>
   <script>
-      $("#modificar").click(function () {
+      $(".click").click(function () {
+          var btnId=$(this).attr("value");
           var n = noty({
-              text: 'Desea eliminar este Registro',
+              text: 'Desea eliminar este Registro?',
               theme: 'relax',
               layout: 'center',
               closeWith: ['click', 'hover'],
@@ -357,43 +461,65 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
                   {
                       addClass: 'btn btn-primary', text: 'Ok', onClick: function ($noty) {
 
-                      // this = button element
-                      // $noty = $noty element
+                      $.post("../controllers/ControladorProducto.php",
 
-                      $noty.close();
-                      noty({text: 'You clicked "Ok" button', type: 'success'});
+                          {
+                              deleteProducto: btnId
+
+
+                          },
+                          function (data) {
+
+                              $noty.close();
+                              noty({text: data, type: 'success'});
+                              location.reload();
+                          });
                   }
                   },
                   {
                       addClass: 'btn btn-danger', text: 'Cancel', onClick: function ($noty) {
                       $noty.close();
-                      noty({text: 'You clicked "Cancel" button', type: 'error'});
+
                   }
                   }
               ],
               type: 'confirm',
               animation: {
-                  open: 'animated bounceInRight', // Animate.css class names
-                  close: 'animated bounceOutRight', // Animate.css class names
+                  open: 'animated wobble', // Animate.css class names
+                  close: 'animated flipOutX', // Animate.css class names
               }
 
           });
 
       });
+      $(".detail").click(function () {
+          $.post("../controllers/ControladorProducto.php",
 
+              {
+                  detailProduct: $(this).attr("value")
+
+
+              },
+              function (data) {
+                  var json = $.parseJSON(data);
+                  $('#nombre').text(json.NombreProducto);
+                  $('#title').text(json.NombreProducto);
+                  $('#description').text(json.DescripcionProducto);
+                  $('#category').text(json.IdCategoriaProductos);
+                  var format=accounting.formatMoney(json.ValorBase);
+                  $('#price').text(format);
+                  $('#precioU').text(format);
+                  $('#presentacion').text(json.IdPresentacionProductos);
+                  $('#fecha').text(json.EstadoProducto);
+                  $('#codigo').text(json.IdProducto);
+                  $('#image').attr('src',json.rutaImagen);
+                  $("#myModal").modal("show");
+
+              });
+
+
+      });
 
   </script>
-  <script>
-      $(document).ready(function() {
 
-          $('#example1').dataTable( {
-              bSort: true,
-              aoColumns: [ { sWidth: "45%" }, { sWidth: "45%" }, { sWidth: "10%", bSearchable: false, bSortable: false } ],
-              "scrollY":        "500px",
-              "scrollCollapse": true,
-              "info":           true,
-              "paging":         true
-          } );
-      } );
-  </script>
 </html>

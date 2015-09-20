@@ -3,47 +3,49 @@ include_once '../utilities/Conexion.php';
 include_once '../models/ProductoDao.php';
 class Facade {
 
-    private $con;
-    private $objDao;
+    private $conexion;
+    private $productoDao;
 
     public function __Construct(){
 
-        $this->con=Conexion::getConexion();
-        $this->objDao=new ProductoDao();
+        $this->conexion=Conexion::getConexion();
+        $this->productoDao=new ProductoDao();
     }
 
     public function registrarProducto(ProductosDto $productoDto){
 
-          return $this->objDao->registrarProducto($productoDto,$this->con);
+          return $this->productoDao->registrarProducto($productoDto,$this->conexion);
     }
     public  function getProductos(){
-        return $this->objDao->listarProductos($this->con);
+        return $this->productoDao->listarProductos($this->conexion);
     }
     public  function  obtenerProducto($userId){
-        return $this->objDao->obtenerProducto($userId,$this->con);
+        return $this->productoDao->obtenerProducto($userId,$this->conexion);
     }
     public function actualizarProducto(ProductosDto $usuarioDto,$idProducto){
-        return $this->objDao->modificarProducto($usuarioDto,$this->con,$idProducto);
+        return $this->productoDao->modificarProducto($usuarioDto,$this->conexion,$idProducto);
     }
     public function  cancelarProducto($idUser){
-        return $this->objDao->cancelarProducto($idUser,$this->con);
+        return $this->productoDao->cancelarProducto($idUser,$this->conexion);
     }
     public function  presentacionId($idUser){
-        return $this->objDao->presentacionId($idUser,$this->con);
+        return $this->productoDao->presentacionId($idUser,$this->conexion);
     }
     public function  obtenerPresentacionProducto(){
-        return $this->objDao->obtenerPresentacionProducto($this->con);
+        return $this->productoDao->obtenerPresentacionProducto($this->conexion);
     }
     public function  obtenerCategoriaProducto(){
-        return $this->objDao->obtenerCategoriaProducto($this->con);
+        return $this->productoDao->obtenerCategoriaProducto($this->conexion);
     }
     public function  obtenerImpuestosProducto(){
-        return $this->objDao->obtenerIvaProducto($this->con);
+        return $this->productoDao->obtenerIvaProducto($this->conexion);
     }
     public function  buscarProducto($criteria){
-        return $this->objDao->searchProduct($criteria,$this->con);
+        return $this->productoDao->buscarProducto($criteria,$this->conexion);
     }
 
-
+    public function buscarConCriterio($criterio,$busqueda,$comobuscar){
+        return $this->productoDao->buscarProductoCriterio($criterio,$busqueda,$comobuscar,$this->conexion);
+    }
 
 }

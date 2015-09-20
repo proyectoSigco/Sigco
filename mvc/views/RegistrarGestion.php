@@ -5,7 +5,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <?php
 session_start();
-if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="Inactivo") /*|| $_SESSION['rol']['rol']!=3)*/{
+if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['datosLogin'])){
     header('location: Invalido.php');
 }
 ?>
@@ -30,6 +30,7 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
     -->
     <link href="../../dist/css/skins/skin-blue.min.css" rel="stylesheet" type="text/css" />
     <link href="../../dist/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="../../plugins/select2/select2.css" rel="stylesheet" type="text/css" />
     <!-- FORMVALIDATION -->
     <script type="text/javascript" src="../../plugins/jQuery/jquery-1.11.3.js"></script>
     <script type="text/javascript" src="../../plugins/formvalidation/formValidation.js"></script>
@@ -239,8 +240,11 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
                                         <select class="form-control select2"  data-placeholder="Seleccione una Empresa" name="idCliente" id="idCliente" >
                                             <?php
                                             require_once '../facades/FacadeGestion.php';
+                                            require_once '../utilities/Conexion.php';
+                                            require_once  '../models/GestionDao.php';
                                             require_once '../facades/FacadeProducto.php';
-
+                                            require_once '../utilities/Conexion.php';
+                                            require_once  '../models/ProductoDao.php';
                                             $empresa = new FacadeGestion();
                                             $empresas = $empresa->obtenerEmpresas();
                                             foreach($empresas as $iterator) { ?>
@@ -366,7 +370,7 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
               locale: 'es_ES',
 
               fields: {
-                  documento: {
+                  idCliente: {
                       validators: {
                           notEmpty: {
                               message: 'Este campo es requerido'
@@ -376,7 +380,15 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
                           }
                       }
                   },
-                  nombres: {
+                  temaproducto: {
+                      validators: {
+                          notEmpty: {
+                              message: 'Este campo es requerido'
+                          }
+
+                      }
+                  },
+                  tipoVisita: {
                       validators: {
                           notEmpty: {
                               message: 'Este campo es requerido'
@@ -392,24 +404,8 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
                           }
                       }
                   },
-                  apellidos: {
-                      validators: {
-                          notEmpty: {
-                              message: 'Este campo es requerido'
-                          },
-                          regexp: {
-                              regexp: /^[a-z\sñÑ]+$/i,
-                              message: 'Solo se permiten letras'
-                          },
-                          stringLength: {
-                              min: 3,
-                              max: 30,
-                              message: 'Este campo debe tener mínimo 3 caracteres y máximo 30'
-                          }
-                      }
-                  },
 
-                  cargo: {
+                  observaciones: {
                       validators: {
                           notEmpty: {
                               message: 'Este campo es requerido'
@@ -420,55 +416,31 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
 
                   },
 
-
-                  email: {
-                      validators: {
-                          notEmpty: {
-                              message: 'Este campo es requerido'
-                          },
-                          emailAddress: {
-                              message: 'Ingrese un correo electrónico válido'
-                          }
-                      }
-                  },
-                  pass1: {
-                      validators: {
-                          notEmpty: {
-                              message: 'Este campo es requerido'
-                          }
-
-                      }
-
-                  },
-
-                  pass2: {
-                      validators: {
-                          notEmpty: {
-                              message: 'Este campo es requerido'
-                          },
-                          identical: {
-                              field: 'pass1',
-                              message: 'La contraseña debe ser identica a la anterior'
-                          }
-
-                      }
-
-                  },
-
-                  captcha: {
+                     asistentes: {
                       validators: {
                           notEmpty: {
                               message: 'Este campo es requerido'
                           },
                           integer: {
-                              message: 'Solo se permiten números'
-                          },
-                          callback: {
-                              message: 'Respuesta inválida',
-
+                              message: 'solo se permiten números'
                           }
                       }
+                  },
+
+                  fechaVisita: {
+                      validators: {
+                          notEmpty: {
+                              message: 'Este campo es requerido'
+                          },
+                          date: {
+                              field: 'pass1',
+                              message: 'Seleciona una Fecha valida'
+                          }
+
+                      }
+
                   }
+
               }
           });
       });
@@ -506,6 +478,17 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
           }
       });
       $(".select2").select2();
+      $( function () {
+          if($('#tipoVisita').val()=='CAPACITACION'){
+              $('#tema').hide();
+              $('#producto').show();
+          }else{
+              $('#producto').hide();
+              $('#tema').show();
+
+          }
+
+      });
 
   </script>
 </html>
