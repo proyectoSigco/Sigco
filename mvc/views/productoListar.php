@@ -352,7 +352,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                                                         <div class="thumbnail" style="text-align: center">
                                                             <span
 
-                                                                class="badge badge-inverse pull-right price"><?php setlocale(LC_MONETARY, 'en_US.UTF-8'); echo money_format('%.2n',$iterator['ValorBase']); ?></span>
+                                                                class="badge badge-inverse pull-right price">$<?php setlocale(LC_MONETARY, 'en_US.UTF-8'); echo $iterator['ValorBase']; ?></span>
                                                             <?php if (!strpos($iterator['rutaImagen'], 'sinImagen.jpg') !== false) { ?>
                                                                 <img class="detail" src="<?php echo $iterator['rutaImagen'] ?>"
                                                                      alt="Unicorn Flux" class="img-responsive">

@@ -45,8 +45,11 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
 
     <script>
   $(function() {
-    $( "#datepicker" ).datepicker();
-  });
+    $("#fechaVisita").datepicker({
+        minDate:0,
+        maxDate: 0,
+    })
+  })
   </script>
     <!-- FORMVALIDATION -->
 
@@ -294,7 +297,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                                     </div>
                                     <div class="form-group">
                                         <label for="pass1">Fecha*</label>
-                                        <input class="form-control" name="fechaVisita" id="fechaVisita" type="date" maxlength="20" placeholder="2010-08-12">
+                                        <input class="form-control" name="fechaVisita" id="fechaVisita" type="text" maxlength="20">
                                     </div>
 
 
