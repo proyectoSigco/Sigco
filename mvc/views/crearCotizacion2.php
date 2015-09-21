@@ -15,7 +15,7 @@ $cliente=$_GET['idcliente'];
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Registrar cotizacion</title>
+    <title>Registrar cotización</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
@@ -384,7 +384,7 @@ $cliente=$_GET['idcliente'];
                                     </div>
                                     <div class="form-group">
                                         <label for="cantidad">Cantidad:*</label>
-                                        <input class="form-control" name="cantidad" id="cantidad" type="text" placeholder="1">
+                                        <input class="form-control" name="cantidad" id="cantidad" type="text" placeholder="5">
                                     </div>
                                     <button class="btn btn-primary pull-right" type="submit"
                                             value="agregar" name="agregar" id="agregar">Agregar producto
@@ -403,13 +403,13 @@ $cliente=$_GET['idcliente'];
                                 <div class="box-body">
                                     <div class="form-group">
                                         <label for="cantidad">Observaciones Cotización:*</label>
-                                        <input class="form-control" name="observaciones" id="cantidad" type="text" placeholder="1">
+                                        <input class="form-control" name="observaciones" id="cantidad" type="text" placeholder="Se garantiza descuento de $100.000 si se confirma la compra dentro de los siguientes 5 días hábiles">
                                     </div>
 
 
                                     <div class="box-footer">
                                         <input type="button" class="btn btn-warning" tabindex="15"
-                                               onclick="location.href='clientes.php'" value="Cancelar"/>
+                                               onclick="location.href='index.php'" value="Cancelar"/>
 
 
                                         <button type="submit" class="btn btn-success pull-right" tabindex="14"

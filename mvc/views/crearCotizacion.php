@@ -12,7 +12,7 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>| Inicio</title>
+    <title>Registrar cotización</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
@@ -298,9 +298,9 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
                                       </div>
                                     <div class="box-footer">
                                           <input type="button" class="btn btn-warning" tabindex="15"
-                                                 onclick="location.href='clientes.php'" value="Cancelar"/>
+                                                 onclick="location.href='index.php'" value="Cancelar"/>
                                           <button type="submit" class="btn btn-success pull-right" tabindex="14"
-                                                  value="guardar" name=" guardar" id="guardar">Guardar producto
+                                                  value="guardar" name=" guardar" id="guardar">Siguiente
                                           </button>
                                       </div>
                            </div>

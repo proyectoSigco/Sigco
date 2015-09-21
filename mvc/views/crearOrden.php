@@ -13,7 +13,7 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
 <html>
   <head>
     <meta charset="UTF-8">
-    <title> Crear orden de compra</title>
+    <title> Registrar orden de compra</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
@@ -192,7 +192,7 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
             <section class="content-header">
                 <h1>
                     Formulario de registro
-                    <small>Cotización</small>
+                    <small>Orden de compra</small>
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
@@ -275,7 +275,7 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
 
                             <!-- general form elements disabled -->
                             <?php
-                            require'../facades/FacadeCotizaciones.php';
+                            require '../facades/FacadeCotizaciones.php';
                             $coti= new FacadeCotizaciones();
                             $cotizacion=$coti->buscarCotizacion($_POST['idcliente']);
                             ?>
@@ -314,15 +314,15 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
 
                                     <div class="form-group">
                                         <label for="cantidad">Observaciones:*</label>
-                                        <input class="form-control" name="observaciones" id="observaciones" type="text" placeholder="1">
+                                        <input class="form-control" name="observaciones" id="observaciones" type="text" placeholder="Por favor entregar en horas de la tarde">
                                     </div>
 
 
                                     <div class="box-footer">
                                         <input type="button" class="btn btn-warning" tabindex="15"
-                                               onclick="location.href='clientes.php'" value="Cancelar"/>
+                                               onclick="location.href='index.php'" value="Cancelar"/>
                                         <button type="submit" class="btn btn-success pull-right" tabindex="14"
-                                                value="guardar" name=" guardar" id="guardar">Guardar producto
+                                                value="guardar" name=" guardar" id="guardar">Guardar Orden
                                         </button>
                                     </div>
                                 </div>

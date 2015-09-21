@@ -221,7 +221,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                                     <div class="form-group">
                                         <p>
                                             Por favor diligencie el siguiente formulario para registrar un nuevo
-                                            prodcto.<br><br>
+                                            producto.<br><br>
                                             Recuerde que este formulario contiene campos obligatorios(*).
                                         </p>
                                     </div>

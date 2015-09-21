@@ -4,44 +4,18 @@
     <bookmark url="file://$PROJECT_DIR$/mvc/utilities/Conexion.php" description="ERROR" line="2" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7028eff5-0d6c-421a-8863-0878f38c66d0" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\xampp\htdocs\Sigco\dist\img\avatar5.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\Sigco\mvc\images\1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\Sigco\mvc\images\2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\Sigco\mvc\images\3.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\Sigco\mvc\images\4.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\Sigco\mvc\images\5.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\Sigco\mvc\images\55da95f24ffd8er.jpeg" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\Sigco\mvc\images\55dab47db21a9index.jpeg" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\Sigco\mvc\images\55dab4bd9ba1eindex.jpeg" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\Sigco\mvc\images\55dab57bf352cindex.jpeg" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\Sigco\mvc\images\55dab5b4b1a17index.jpeg" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\Sigco\mvc\images\55dab5d6694fcindex.jpeg" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\Sigco\mvc\images\55dab6837f5a5index.jpeg" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\Sigco\mvc\images\55dab69fb5b7findex.jpeg" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\Sigco\mvc\images\55dab7780af25fabulas del arco iris.JPG" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\Sigco\mvc\images\55dab7a3d025dfabulas del arco iris.JPG" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\Sigco\mvc\images\55e697911d48fimages (3).jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\Sigco\mvc\images\55e69d3f6e4dbT" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\Sigco\mvc\images\55e7deab67053images (3).jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\Sigco\mvc\images\55e920f1d7044placeholder.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\Sigco\mvc\images\55e920f1d7044placeholderold.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\Sigco\mvc\images\55eb98f5b022bdoc.pdf" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\Sigco\mvc\images\55ee411056cd0images (3).jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\Sigco\mvc\images\download.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\Sigco\mvc\images\images.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\xampp\htdocs\Sigco\mvc\images\placeholder.jpeg" afterPath="" />
-      <change type="MOVED" beforePath="C:\xampp\htdocs\Sigco\.idea\paginaWebProyecto.iml" afterPath="$PROJECT_DIR$/.idea/Sigco.iml" />
+    <list default="true" id="7028eff5-0d6c-421a-8863-0878f38c66d0" name="Default" comment="DATE PICKER ruta imagen coordinador">
       <change type="MOVED" beforePath="C:\xampp\htdocs\Sigco\mvc\views\RegistrarProducto.php" afterPath="$PROJECT_DIR$/mvc/views/registrarProducto.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc/utilities/Conexion.php" afterPath="$PROJECT_DIR$/mvc/utilities/Conexion.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc/views/RegistrarGestion.php" afterPath="$PROJECT_DIR$/mvc/views/RegistrarGestion.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc/views/index.php" afterPath="$PROJECT_DIR$/mvc/views/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc/views/nuevoCliente.php" afterPath="$PROJECT_DIR$/mvc/views/nuevoCliente.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc/views/productoListar.php" afterPath="$PROJECT_DIR$/mvc/views/productoListar.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc/views/buscarCotizaciones.php" afterPath="$PROJECT_DIR$/mvc/views/buscarCotizaciones.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc/views/buscarGestion.php" afterPath="$PROJECT_DIR$/mvc/views/buscarGestion.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc/views/buscarOrdenes.php" afterPath="$PROJECT_DIR$/mvc/views/buscarOrdenes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc/views/crearCotizacion.php" afterPath="$PROJECT_DIR$/mvc/views/crearCotizacion.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc/views/crearCotizacion2.php" afterPath="$PROJECT_DIR$/mvc/views/crearCotizacion2.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc/views/crearOrden.php" afterPath="$PROJECT_DIR$/mvc/views/crearOrden.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc/views/crearOrden1.php" afterPath="$PROJECT_DIR$/mvc/views/crearOrden1.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc/views/registrarProducto.php" afterPath="$PROJECT_DIR$/mvc/views/registrarProducto.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/mvc/.idea/workspace.xml" afterPath="$PROJECT_DIR$/mvc/.idea/workspace.xml" />
     </list>
     <ignored path="paginaWebProyecto.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -110,48 +84,7 @@
     <favorites_list name="paginaWebProyecto" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/index.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="5.8846154">
-              <caret line="5" column="41" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="buscarGestion.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mvc/views/buscarGestion.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="452.76923">
-              <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Conexion.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/mvc/utilities/Conexion.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.576923">
-              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="productoListar.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/mvc/views/productoListar.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.29802513">
-              <caret line="355" column="135" selection-start-line="355" selection-start-column="135" selection-end-line="355" selection-end-column="135" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -159,7 +92,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/mvc/facades/FacadeOrdenCompra.php" />
         <option value="$PROJECT_DIR$/mvc/controllers/ControladorOrdenCompra.php" />
         <option value="$PROJECT_DIR$/mvc/controllers/ClientesController.php" />
         <option value="$PROJECT_DIR$/mvc/models/ClientesDao.php" />
@@ -183,15 +115,8 @@
         <option value="$PROJECT_DIR$/mvc/views/asignarRol.php" />
         <option value="$PROJECT_DIR$/mvc/views/buscarClienteNuevaEmpresa.php" />
         <option value="$PROJECT_DIR$/mvc/views/buscarClientes.php" />
-        <option value="$PROJECT_DIR$/mvc/views/buscarCotizaciones.php" />
         <option value="$PROJECT_DIR$/mvc/views/buscarEmpleado.php" />
-        <option value="$PROJECT_DIR$/mvc/views/buscarGestion.php" />
         <option value="$PROJECT_DIR$/mvc/views/buscarMetas.php" />
-        <option value="$PROJECT_DIR$/mvc/views/buscarOrdenes.php" />
-        <option value="$PROJECT_DIR$/mvc/views/crearCotizacion.php" />
-        <option value="$PROJECT_DIR$/mvc/views/crearCotizacion2.php" />
-        <option value="$PROJECT_DIR$/mvc/views/crearOrden.php" />
-        <option value="$PROJECT_DIR$/mvc/views/crearOrden1.php" />
         <option value="$PROJECT_DIR$/mvc/views/detallesCotizacion.php" />
         <option value="$PROJECT_DIR$/mvc/views/modificarCliente.php" />
         <option value="$PROJECT_DIR$/mvc/views/ModificarEmpleado.php" />
@@ -202,7 +127,6 @@
         <option value="$PROJECT_DIR$/mvc/views/plantilla.php" />
         <option value="$PROJECT_DIR$/mvc/views/permisosRoles.php" />
         <option value="$PROJECT_DIR$/mvc/views/RegistrarEmpleado.php" />
-        <option value="$PROJECT_DIR$/mvc/views/RegistrarGestion.php" />
         <option value="$PROJECT_DIR$/mvc/views/registrarMeta.php" />
         <option value="$PROJECT_DIR$/mvc/views/RegistrarProducto.php" />
         <option value="$PROJECT_DIR$/mvc/views/verCatalogo.php" />
@@ -210,6 +134,15 @@
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/mvc/utilities/Conexion.php" />
         <option value="$PROJECT_DIR$/mvc/views/productoListar.php" />
+        <option value="$PROJECT_DIR$/mvc/views/crearCotizacion2.php" />
+        <option value="$PROJECT_DIR$/mvc/views/crearOrden.php" />
+        <option value="$PROJECT_DIR$/mvc/views/buscarOrdenes.php" />
+        <option value="$PROJECT_DIR$/mvc/views/buscarCotizaciones.php" />
+        <option value="$PROJECT_DIR$/mvc/views/RegistrarGestion.php" />
+        <option value="$PROJECT_DIR$/mvc/views/buscarGestion.php" />
+        <option value="$PROJECT_DIR$/mvc/views/registrarProducto.php" />
+        <option value="$PROJECT_DIR$/mvc/views/crearCotizacion.php" />
+        <option value="$PROJECT_DIR$/mvc/views/crearOrden1.php" />
       </list>
     </option>
   </component>
@@ -270,52 +203,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Sigco" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Sigco" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Sigco" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="plugins" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Sigco" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Sigco" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mvc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Sigco" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Sigco" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mvc" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -382,13 +269,20 @@
       <option name="number" value="Default" />
       <updated>1439064693975</updated>
     </task>
+    <task id="LOCAL-00001" summary="DATE PICKER ruta imagen coordinador">
+      <created>1442802966811</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1442802966811</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1370" height="772" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33053434" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2221374" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32852563" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -399,7 +293,7 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3297546" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296875" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="PHP-CGI Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -426,7 +320,8 @@
   <component name="VcsManagerConfiguration">
     <option name="MAXIMUM_HISTORY_ROWS" value="10000" />
     <MESSAGE value="prueba" />
-    <option name="LAST_COMMIT_MESSAGE" value="prueba" />
+    <MESSAGE value="DATE PICKER ruta imagen coordinador" />
+    <option name="LAST_COMMIT_MESSAGE" value="DATE PICKER ruta imagen coordinador" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -435,6 +330,38 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="41" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mvc/views/buscarGestion.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mvc/utilities/Conexion.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mvc/views/productoListar.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -447,7 +374,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -499,6 +425,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -573,13 +500,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mvc/views/asignarMeta.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33014354">
-          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mvc/views/asignarRol.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33014354">
@@ -595,55 +515,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mvc/views/buscarClientes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.9615383">
-          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mvc/views/buscarCotizaciones.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.9615383">
-          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mvc/views/buscarOrdenes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.9615383">
-          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mvc/views/crearCotizacion.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.9615383">
-          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mvc/views/crearCotizacion2.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.846154">
-          <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mvc/views/crearOrden.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.9615383">
-          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mvc/views/crearOrden1.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.9615383">
-          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mvc/views/detallesCotizacion.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.9615383">
           <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
@@ -675,7 +546,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.65384614">
           <caret line="10" column="1" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -700,14 +570,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mvc/views/RegistrarGestion.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/mvc/views/registrarMeta.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -715,41 +577,114 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mvc/views/registrarProducto.php">
+    <entry file="file://$PROJECT_DIR$/mvc/views/productoListar.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="5.8846154">
-          <caret line="5" column="41" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mvc/views/buscarGestion.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="452.76923">
-          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="355" column="135" selection-start-line="355" selection-start-column="135" selection-end-line="355" selection-end-column="135" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/mvc/utilities/Conexion.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.576923">
+        <state vertical-scroll-proportion="0.20307167">
           <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/mvc/views/productoListar.php">
+    <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29802513">
-          <caret line="355" column="135" selection-start-line="355" selection-start-column="135" selection-end-line="355" selection-end-column="135" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="41" selection-start-line="5" selection-start-column="41" selection-end-line="5" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mvc/views/asignarMeta.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26109216">
+          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mvc/views/crearCotizacion2.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.461538">
+          <caret line="411" column="76" selection-start-line="411" selection-start-column="76" selection-end-line="411" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mvc/views/crearOrden.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.325938">
+          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mvc/views/buscarOrdenes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.69624573">
+          <caret line="302" column="103" selection-start-line="302" selection-start-column="103" selection-end-line="302" selection-end-column="103" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mvc/views/buscarCotizaciones.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8993174">
+          <caret line="304" column="63" selection-start-line="304" selection-start-column="63" selection-end-line="304" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mvc/views/RegistrarGestion.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="222" column="50" selection-start-line="222" selection-start-column="50" selection-end-line="222" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mvc/views/buscarGestion.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.87030715">
+          <caret line="267" column="103" selection-start-line="267" selection-start-column="103" selection-end-line="267" selection-end-column="103" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mvc/views/detallesCotizacion.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26109216">
+          <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mvc/views/crearOrden1.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.69453925">
+          <caret line="303" column="102" selection-start-line="303" selection-start-column="102" selection-end-line="303" selection-end-column="102" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mvc/views/crearCotizacion.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6040956">
+          <caret line="302" column="104" selection-start-line="302" selection-start-column="104" selection-end-line="302" selection-end-column="104" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mvc/views/registrarProducto.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49317408">
+          <caret line="252" column="66" selection-start-line="252" selection-start-column="66" selection-end-line="252" selection-end-column="66" />
           <folding />
         </state>
       </provider>

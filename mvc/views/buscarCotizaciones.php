@@ -193,7 +193,7 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    Clientes
+                    Cotizaciones
                     <small>Buscar</small>
                 </h1>
                 <ol class="breadcrumb">
@@ -300,7 +300,7 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
                                         </div><!-- /btn-group -->
                                         <input type="text" name="busqueda" class="form-control" placeholder="Número Nit | Razón Social | Lugar" required tabindex="3">
                     <span class="input-group-btn">
-                      <button class="btn btn-info btn-flat" type="submit" tabindex="4">Buscar cotización</button>
+                      <button class="btn btn-info btn-flat" type="submit" tabindex="4">Buscar cotización(es)</button>
                     </span>
                                     </div><!-- /input-group -->
 

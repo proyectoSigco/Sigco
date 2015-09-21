@@ -265,7 +265,7 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
                             </div><!-- /.box-header -->
                             <div class="box-body">
                                 <p>
-                                    Use las siguientes opciones para realizar la búsqueda de una Gestion.
+                                    Use las siguientes opciones para realizar la búsqueda de una Gestión.
                                     Recuerde que en este formulario hay campos obligatorios(*).<br><br>
                                 </p>
 
