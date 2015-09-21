@@ -563,15 +563,7 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
   <script type="text/javascript">
       $(document).ready(function() {
 
-          function randomNumber(min, max) {
-              return Math.floor(Math.random() * (max - min + 1) + min);
-          }
-
-          function generateCaptcha() {
-              $('#captchaOperation').html([randomNumber(1, 100), '+', randomNumber(1, 200), '='].join(' '));
-          }
           $('.click').click( function () {
-              console.log($(this).attr("value"));
               $.post("../controllers/ControladorGestion.php",
 
                   {
@@ -587,13 +579,11 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
                       $('#fecha').text(json.FechaProgramada);
                       $('#modificacion').text(json.CedulaEmpleadoGestiones);
                       $('#Cliente').text(json.NitClienteGestiones);
-
                       $("#myModal").modal("show");
 
                   });
           });
 
-          generateCaptcha();
           $('#defaultForm').formValidation({
               message: 'This value is not valid',
               icon: {
@@ -731,6 +721,7 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
           $('span:contains("Realizada")').addClass('label-success');
           $('span:contains("Cancelada")').addClass('label-danger');
       });
+
   </script>
   <script type="text/javascript">
       $(function () {

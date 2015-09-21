@@ -225,9 +225,9 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                                     <div class="form-group">
                                         <label for="criterio">Seleccione un criterio de búsqueda*</label>
                                         <select class="form-control select2" name="criterio" id="criterio" required tabindex="1" autofocus>
-                                            <option value="Gestiones.IdProducto" selected>Código de Producto</option>
-                                            <option value="Gestiones.NombreProducto" >Nombre Producto</option>
-                                            <option value="Gestiones.ValorBase">Precio Producto</option>
+                                            <option value="Productos.IdProducto" selected>Código de Producto</option>
+                                            <option value="Productos.NombreProducto" >Nombre Producto</option>
+                                            <option value="Productos.ValorBase">Precio Producto</option>
                                         </select>
                                     </div>
 
@@ -296,7 +296,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                                                     <img class="img-thumbnail" id="image" src="../images/55e920f1d7044placeholder.png" alt=""/>
                                                 </div>
                                                 <div class="clearfix">
-                                                    <p>Descripción</p>
+                                                    <strong>Descripción</strong>
                                                     <p class="info_open" id="description"> Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
                                                 </div>
 

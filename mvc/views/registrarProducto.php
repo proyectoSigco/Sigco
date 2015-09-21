@@ -13,7 +13,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Registrar gestión</title>
+    <title>Registrar producto</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
@@ -30,13 +30,16 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
     -->
     <link href="../../dist/css/skins/skin-blue.min.css" rel="stylesheet" type="text/css" />
     <link href="../../dist/css/style.css" rel="stylesheet" type="text/css" />
-    <link href="../../plugins/select2/select2.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="../../plugins/select2/select2.css"/>
+
     <!-- FORMVALIDATION -->
     <script type="text/javascript" src="../../plugins/jQuery/jquery-1.11.3.js"></script>
     <script type="text/javascript" src="../../plugins/formvalidation/formValidation.js"></script>
     <script type="text/javascript" src="../../plugins/formvalidation/framework/bootstrap.js"></script>
     <script type="text/javascript" src="../../plugins/formvalidation/language/es_ES.js"></script>
-    <script type="text/javascript" src="../../plugins/select2/select2.js"></script>
+    <script type="" src="../../plugins/select2/select2.min.js" ></script>
+
+
 
     <link rel="stylesheet" href="../../date/jquery-ui.css">
   <script src="../../date/jquery-ui.js"></script>
@@ -185,16 +188,17 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
         </aside>
 
       <!-- Content Wrapper. Contains page content -->
+
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    Formulario de registro
-                    <small>Visitas</small>
+                    Formulario de Creación
+                    <small>Productos</small>
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
-                    <li><a href="#">Visitas</a></li>
+                    <li><a href="#">Productos</a></li>
                     <li class="active">Registrar</li>
                 </ol>
             </section>
@@ -205,19 +209,19 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
 
                     <!-- right column -->
                     <div class="col-md-10">
-                        <form id="defaultForm" action="../controllers/ControladorGestion.php" method="post">
+                        <form id="defaultForm" action="../controllers/ControladorProducto.php" method="post" enctype="multipart/form-data">
 
                             <div class="box box-default">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title">Registrar Visita</h3>
+                                    <h3 class="box-title">Nuevo producto</h3>
                                 </div>
                                 <!-- /.box-header -->
                                 <div class="box-body">
 
                                     <div class="form-group">
                                         <p>
-                                            Por favor diligencie el siguiente formulario para registrar una nueva
-                                            Gestion.<br><br>
+                                            Por favor diligencie el siguiente formulario para registrar un nuevo
+                                            prodcto.<br><br>
                                             Recuerde que este formulario contiene campos obligatorios(*).
                                         </p>
                                     </div>
@@ -229,83 +233,79 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
 
                             <div class="box box-default">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title">Registrar Visita</h3>
+                                    <h3 class="box-title">Modificar Producto</h3>
                                 </div>
 
                                 <div class="box-body">
 
 
                                     <div class="form-group">
-                                        <label for="cc">Nit*</label>
-                                        <select class="form-control select2"  data-placeholder="Seleccione una Empresa" name="idCliente" id="idCliente" >
-                                            <?php
-                                            require_once '../facades/FacadeGestion.php';
-                                            require_once '../utilities/Conexion.php';
-                                            require_once  '../models/GestionDao.php';
-                                            require_once '../facades/FacadeProducto.php';
-                                            require_once '../utilities/Conexion.php';
-                                            require_once  '../models/ProductoDao.php';
-                                            $empresa = new FacadeGestion();
-                                            $empresas = $empresa->obtenerEmpresas();
-                                            foreach($empresas as $iterator) { ?>
-                                                <option value="<?php echo $iterator['Nit']; ?>"><?php echo $iterator['Nit']; ?></option>
-                                            <?php } ?>
-                                        </select>
+                                        <label for="names">Nombre de producto*</label>
+                                        <input class="form-control" name="nombreProducto" id="names" type="text" placeholder="Map-234556" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="names">Nombre del cliente:</label>
-                                        <input class="form-control" name="cliente" id="cliente" type="text"  value="<?php echo $iterator['RazonSocial']; ?>" readonly>
+                                        <label for="apellido">Descripción*</label>
+                                        <textarea class="form-control" name="descriptionProducto" id="descriptionProducto" type="text" maxlength="200" placeholder="" rows="5"></textarea>
 
                                     </div>
+
                                     <div class="form-group">
-                                        <label for="apellido">Tipo visita*</label>
-                                        <select class="form-control select2" data-placeholder="Seleccione una Empresa" name="tipoVisita" id="tipoVisita">
-                                            <option value="ASESORIA">Asesoria</option>
-                                            <option value="CAPACITACION">Capacitación</option>
-                                        </select>
-
-                                    </div>
-                                    <div class="form-group"  id="producto">
-                                        <label for="cargo">Producto*</label>
-                                        <select  class="form-control select2" data-placeholder="Seleccione una Empresa" name="temaproducto">
+                                        <label for="cargo">IVA*</label>
+                                        <select class="form-control select2" name="ivaProducto" id="cargo">
+                                            <option value="">Seleccionar</option>
                                             <?php
+                                            require '../facades/FacadeProducto.php';
+
                                             $producto = new Facade();
-                                            $Productos = $producto->getProductos();
+                                            $Productos = $producto->obtenerImpuestosProducto();
                                             foreach($Productos as $iterator) { ?>
-                                                <option value="<?php echo $iterator['IdProducto']; ?>"><?php echo $iterator['NombreProducto']; ?></option>
+                                                <option value="<?php echo $iterator['IdIva']; ?>"><?php echo $iterator['PorcentajeIva']; ?></option>
                                                 <?php
                                             }?>
                                         </select>
                                     </div>
-                                    <div class="form-group"  id="tema">
-                                        <label for="email" >Tema*</label>
-                                        <input class="form-control" name="temaproducto"  type="text" maxlength="20" placeholder="Desengrasantes">
+
+                                    <div class="form-group">
+                                        <label for="pass1">Valor*</label>
+                                        <input class="form-control" name="valorProducto" id="pass1" type="number" maxlength="20" required title="Este campo es requerido">
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="pass1">Asistentes*</label>
-                                        <input class="form-control" name="asistentes" id="asistentes" type="number" placeholder="" min="1">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="pass2">Descripccion*</label>
-                                        <textarea class="form-control" name="observaciones" id="observaciones" type="text" maxlength="100" placeholder="" rows="5"></textarea>
-
+                                        <label for="imagen">Imágen</label>
+                                        <input  name="ImagenProducto" id="imagen"  type="file" multiple=true class="file"  title="Este campo es requerido">
                                     </div>
                                     <div class="form-group">
-                                        <label for="pass1">Fecha*</label>
-                                        <input class="form-control" name="fechaVisita" id="fechaVisita" type="date" maxlength="20" placeholder="2010-08-12">
+                                        <label for="presentacionProducto">Presentación producto*</label>
+                                        <select class="form-control select2" name="presentacionProducto" id="cargo">
+                                            <option value="">Selecionar </option>
+                                            <?php
+
+                                            $producto = new Facade();
+                                            $Productos = $producto->obtenerPresentacionProducto();
+                                            foreach($Productos as $iterator) { ?>
+                                                <option value="<?php echo $iterator['IdPresentacion']; ?>"><?php echo $iterator['NombrePresentacion']; ?></option>
+                                                <?php
+                                            }?>
+                                        </select>
                                     </div>
-
-
                                     <div class="form-group">
-                                        <label for="imagen">Lugar*</label>
-                                        <input class="form-control" name="lugar" type="text" id="lugar" placeholder="Carrera 15 # 24 10" required>                                    </div>
+                                        <label for="categoriaProducto">Categoria producto*</label>
+                                        <select class="form-control select2" name="categoriaProducto" id="cargo">
+                                            <option value="">Seleccionar</option>
+                                            <?php
+                                            $producto = new Facade();
+                                            $Productos = $producto->obtenerCategoriaProducto();
+                                            foreach($Productos as $iterator) { ?>
+                                                <option value="<?php echo $iterator['IdCategoria']; ?>"><?php echo $iterator['NombreCategoria']; ?></option>
+                                                <?php
+                                            }?>
+                                        </select>
+                                    </div>
                                     <div class="box-footer">
                                         <input type="button" class="btn btn-warning" tabindex="15"
-                                               value="Cancelar"/>
+                                               onclick="location.href='index.php'" value="Cancelar"/>
                                         <button type="submit" class="btn btn-success pull-right" tabindex="14"
-                                                value="registrar" name="registrar" id="guardar">Guardar Gestión
+                                                value="guardar" name="guardar" id="guardar">Guardar producto
                                         </button>
                                     </div>
 
@@ -325,8 +325,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
     <!-- /.row -->
     </section>
     <!-- /.content -->
-    </div>
-
+    </div><!-- /.content-wrapper -->
 
       <!-- Main Footer -->
       <footer class="main-footer">
@@ -357,139 +356,73 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
           fixed layout. -->
   </body>
   <script type="text/javascript">
-      $(document).ready(function() {
+$(document).ready(function() {   
 
-          $('#defaultForm').formValidation({
-              message: 'This value is not valid',
-              icon: {
-                  valid: 'glyphicon glyphicon-ok',
-                  invalid: 'glyphicon glyphicon-remove',
-                  validating: 'glyphicon glyphicon-refresh'
-              },
+    function randomNumber(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
 
-              locale: 'es_ES',
+    function generateCaptcha() {
+        $('#captchaOperation').html([randomNumber(1, 100), '+', randomNumber(1, 200), '='].join(' '));
+    }
 
-              fields: {
-                  idCliente: {
-                      validators: {
-                          notEmpty: {
-                              message: 'Este campo es requerido'
-                          },
-                          integer: {
-                              message: 'Solo se permite el ingreso de números'
-                          }
-                      }
-                  },
-                  temaproducto: {
-                      validators: {
-                          notEmpty: {
-                              message: 'Este campo es requerido'
-                          }
-
-                      }
-                  },
-                  tipoVisita: {
-                      validators: {
-                          notEmpty: {
-                              message: 'Este campo es requerido'
-                          },
-                          regexp: {
-                              regexp: /^[a-z\sñÑ]+$/i,
-                              message: 'Solo se permiten letras'
-                          },
-                          stringLength: {
-                              min: 3,
-                              max: 30,
-                              message: 'Este campo debe tener mínimo 3 caracteres y máximo 30'
-                          }
-                      }
-                  },
-
-                  observaciones: {
-                      validators: {
-                          notEmpty: {
-                              message: 'Este campo es requerido'
-                          }
-
-                      }
+    generateCaptcha(); 
+    $('#defaultForm').formValidation({
+        message: 'This value is not valid',
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
 
 
-                  },
+        fields: {
+            nombreProducto: {
+                validators: {
+                    notEmpty: {
+                        message: 'Este campo es requerido'
+                    }
+                }
+            },
+            descriptionProducto: {
+                validators: {
+                    notEmpty: {
+                        message: 'Este campo es requerido'
+                    }
+                }
+            },
+            ivaProducto: {
+                validators: {
+                    notEmpty: {
+                        message: 'Este campo es requerido'
+                    }
+                }
+            },
+            valorProducto: {
+                validators: {
+                    notEmpty: {
+                        message: 'Este campo es requerido'
+                        }
+                    }
+                },
+                presentacionProducto:{
+                    validators: {
+                        notEmpty: {
+                            message: 'Este campo es requerido'
+                            }
+                        }
+                    },
+            categoriaProducto:{
+                validators: {
+                    notEmpty: {
+                        message: 'Este campo es requerido'
+                    }
+                }
+            }
 
-                     asistentes: {
-                      validators: {
-                          notEmpty: {
-                              message: 'Este campo es requerido'
-                          },
-                          integer: {
-                              message: 'solo se permiten números'
-                          }
-                      }
-                  },
-
-                  fechaVisita: {
-                      validators: {
-                          notEmpty: {
-                              message: 'Este campo es requerido'
-                          },
-                          date: {
-                              field: 'pass1',
-                              message: 'Seleciona una Fecha valida'
-                          }
-
-                      }
-
-                  }
-
-              }
-          });
-      });
-
-      $.post("../controllers/ControladorGestion.php",
-          {
-              reload: $('#idCliente').val()
-          },
-          function (data) {
-              $('#cliente').val(data);
-          });
-      $( function () {
-          if($('#tipoVisita').val()=='CAPACITACION'){
-              $('#tema').hide();
-              $('#producto').show();
-          }else{
-              $('#producto').hide();
-              $('#tema').show();
-
-          }
-
-      });
-  </script>
-  <script>
-
-      $('#idCliente').on('change', function () {
-          $.post("../controllers/ControladorGestion.php",
-              {
-                  reload: $('#idCliente').val()
-              },
-              function (data) {
-                  $('#cliente').val(data);
-              });
-
-
-      });
-
-      $('#tipoVisita').on('change',function(){
-          if($('#tipoVisita').val()=='CAPACITACION'){
-              $('#tema').hide();
-              $('#producto').show();
-          }else{
-              $('#producto').hide();
-              $('#tema').show();
-
-          }
-      });
-      $(".select2").select2();
-
-
-  </script>
+        }
+    });
+});
+      $('.select2').select2();
+</script>
 </html>
