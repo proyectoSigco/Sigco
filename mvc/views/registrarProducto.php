@@ -5,7 +5,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <?php
 session_start();
-if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['datosLogin'])){
+if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="Inactivo") /*|| $_SESSION['rol']['rol']!=3)*/{
     header('location: Invalido.php');
 }
 ?>
@@ -30,14 +30,12 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
     -->
     <link href="../../dist/css/skins/skin-blue.min.css" rel="stylesheet" type="text/css" />
     <link href="../../dist/css/style.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="../../plugins/select2/select2.css"/>
 
     <!-- FORMVALIDATION -->
     <script type="text/javascript" src="../../plugins/jQuery/jquery-1.11.3.js"></script>
     <script type="text/javascript" src="../../plugins/formvalidation/formValidation.js"></script>
     <script type="text/javascript" src="../../plugins/formvalidation/framework/bootstrap.js"></script>
     <script type="text/javascript" src="../../plugins/formvalidation/language/es_ES.js"></script>
-    <script type="" src="../../plugins/select2/select2.min.js" ></script>
 
 
 
@@ -193,7 +191,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    Formulario de Creación
+                    Formulario de modificación
                     <small>Productos</small>
                 </h1>
                 <ol class="breadcrumb">
@@ -221,7 +219,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                                     <div class="form-group">
                                         <p>
                                             Por favor diligencie el siguiente formulario para registrar un nuevo
-                                            producto.<br><br>
+                                            prodcto.<br><br>
                                             Recuerde que este formulario contiene campos obligatorios(*).
                                         </p>
                                     </div>
@@ -238,20 +236,23 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
 
                                 <div class="box-body">
 
-
+                                    <div class="form-group">
+                                        <label for="cc">Codigo producto*</label>
+                                        <input class="form-control" name="codigoProducto" id="cc" type="text" placeholder="10311433222" required>
+                                    </div>
                                     <div class="form-group">
                                         <label for="names">Nombre de producto*</label>
                                         <input class="form-control" name="nombreProducto" id="names" type="text" placeholder="Map-234556" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="apellido">Descripción*</label>
-                                        <textarea class="form-control" name="descriptionProducto" id="descriptionProducto" type="text" maxlength="200" placeholder="" rows="5"></textarea>
+                                        <textarea class="form-control" name="descriptionProducto" id="descriptionProducto" type="text" maxlength="100" placeholder="" rows="5"></textarea>
 
                                     </div>
 
                                     <div class="form-group">
                                         <label for="cargo">IVA*</label>
-                                        <select class="form-control select2" name="ivaProducto" id="cargo">
+                                        <select class="form-control" name="ivaProducto" id="cargo">
                                             <option value="">Seleccionar</option>
                                             <?php
                                             require '../facades/FacadeProducto.php';
@@ -276,7 +277,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                                     </div>
                                     <div class="form-group">
                                         <label for="presentacionProducto">Presentación producto*</label>
-                                        <select class="form-control select2" name="presentacionProducto" id="cargo">
+                                        <select class="form-control" name="presentacionProducto" id="cargo">
                                             <option value="">Selecionar </option>
                                             <?php
 
@@ -290,7 +291,7 @@ if ($_SESSION['datosLogin']['EstadoPersona']=="Inactivo" or !isset($_SESSION['da
                                     </div>
                                     <div class="form-group">
                                         <label for="categoriaProducto">Categoria producto*</label>
-                                        <select class="form-control select2" name="categoriaProducto" id="cargo">
+                                        <select class="form-control" name="categoriaProducto" id="cargo">
                                             <option value="">Seleccionar</option>
                                             <?php
                                             $producto = new Facade();
@@ -374,55 +375,28 @@ $(document).ready(function() {
             invalid: 'glyphicon glyphicon-remove',
             validating: 'glyphicon glyphicon-refresh'
         },
-
+         
+                locale: 'es_ES',
 
         fields: {
-            nombreProducto: {
+            cedula: {
                 validators: {
                     notEmpty: {
                         message: 'Este campo es requerido'
                     }
                 }
             },
-            descriptionProducto: {
+            meta: {
                 validators: {
                     notEmpty: {
                         message: 'Este campo es requerido'
                     }
                 }
             },
-            ivaProducto: {
-                validators: {
-                    notEmpty: {
-                        message: 'Este campo es requerido'
-                    }
-                }
-            },
-            valorProducto: {
-                validators: {
-                    notEmpty: {
-                        message: 'Este campo es requerido'
-                        }
-                    }
-                },
-                presentacionProducto:{
-                    validators: {
-                        notEmpty: {
-                            message: 'Este campo es requerido'
-                            }
-                        }
-                    },
-            categoriaProducto:{
-                validators: {
-                    notEmpty: {
-                        message: 'Este campo es requerido'
-                    }
-                }
-            }
+
 
         }
     });
 });
-      $('.select2').select2();
 </script>
 </html>
