@@ -13,7 +13,7 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
 <html>
 <head>
     <meta charset="UTF-8">
-    <title> Modificar cliente</title>
+    <title>Nueva clasificación</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
@@ -191,253 +191,85 @@ desired effect
         <!-- /.sidebar -->
     </aside>
 
-    <?php
-    require_once '../facades/ClienteFacade.php';
-    if (isset($_GET['IdCliente'])) {
-        $clienteFac = new ClienteFacade();
-        $cliente = $clienteFac->obtenerCliente($_GET['IdCliente']);
-        ?>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Formulario de registro
+                <small>Clasificaciones</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+                <li><a href="#">Clasificaciones</a></li>
+                <li class="active">Nueva Clasificaciones</li>
+            </ol>
+        </section>
 
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-                <h1>
-                    Formulario de modificación
-                    <small>Clientes</small>
-                </h1>
-                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
-                    <li><a href="#">Clientes</a></li>
-                    <li class="active">Modificar cliente</li>
-                </ol>
-            </section>
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
 
-            <!-- Main content -->
-            <section class="content">
-                <div class="row">
+                <!-- right column -->
+                <div class="col-md-10">
+                    <form action="../controllers/ClasificacionesController.php?controlar=crear"
+                          method="post" class="validacion" id="formValidacion">
 
-                    <!-- right column -->
-                    <div class="col-md-10">
-                        <form
-                            action="../controllers/ClientesController.php?controlar=modificar&IdCliente=<?php echo $_GET['IdCliente'].'&IdPersona='.$_GET['IdPersona'];?>"
-                            method="post" id="formValidacion">
-
-                            <!-- general form elements disabled -->
-                            <div class="box box-default">
-                                <div class="box-header with-border">
-                                    <h3 class="box-title">Modificar cliente</h3>
-                                </div>
-                                <!-- /.box-header -->
-                                <div class="box-body">
-                                    <!-- text input -->
-                                    <div class="form-group">
-                                        <p>
-                                            Por favor diligencie el siguiente formulario para actualizar la información
-                                            de un cliente.<br><br>
-                                            Recuerde que este formulario contiene campos obligatorios(*).
-                                        </p>
-                                    </div>
+                        <!-- general form elements disabled -->
+                        <div class="box box-default">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Nueva clasificación</h3>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <!-- text input -->
+                                <div class="form-group">
+                                    <p>
+                                        Por favor diligencie el siguiente formulario para registrar una nueva
+                                        clasificación.<br><br>
+                                        Recuerde que este formulario contiene campos obligatorios(*).
+                                    </p>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="box box-default">
-                                <div class="box-header with-border">
-                                    <h3 class="box-title">Información corporativa registrada</h3>
-                                </div>
-                                <!-- /.box-header -->
-                                <div class="box-body">
-
-                                    <div class="form-group">
-                                        <label for="Nit">NIT*</label>
-                                        <input type="text" name="Nit" id="Nit" class="form-control"
-                                               value="<?php echo $cliente['Nit']; ?>" autofocus required tabindex="1"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="RazonSocial">Razón social*</label>
-                                        <input type="text" name="RazonSocial" id="RazonSocial" class="form-control"
-                                               value="<?php echo $cliente['RazonSocial']; ?>" required tabindex="2"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="Direccion">Dirección*</label>
-                                        <input type="text" name="Direccion" id="Direccion" class="form-control"
-                                               value="<?php echo $cliente['Direccion']; ?>" required tabindex="3"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="Telefono">Teléfono principal*</label>
-                                        <input type="text" name="Telefono" id="Telefono" class="form-control"
-                                               value="<?php echo $cliente['Telefono']; ?>" required tabindex="4"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="Email2">Email corporativo*</label>
-                                        <input type="email" name="Email2" id="Email2" class="form-control"
-                                               value="<?php echo $cliente['EmailCliente']; ?>" required tabindex="5"/>
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <label for="IdLugar">Lugar*</label>
-                                        <select class="form-control select2" name="IdLugar" id="IdLugar" required
-                                                tabindex="6">
-                                            <?php
-                                            require_once '../facades/LugaresFacade.php';
-                                            $lugaresFac = new LugaresFacade();
-                                            $todasCiudades = $lugaresFac->listarTodos();
-                                            foreach ($todasCiudades as $ciudad) {
-                                                ?>
-                                                <option <?php if($cliente['IdLugarCliente']==$ciudad['IdLugar']){echo ' selected ';}; ?>
-                                                    value="<?php echo $ciudad['IdLugar'] ?>"><?php echo $ciudad['NombreLugar'] ?></option>
-                                                <?php
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <label for="IdTipo">Tipo de cliente*</label>
-                                        <select class="form-control select2" name="IdTipo" id="IdTipo" required
-                                                tabindex="7">
-                                            <?php
-                                            require_once '../facades/TiposEmpresasFacade.php';
-                                            $tiposCliente = new TiposEmpresasFacade();
-                                            $todosTiposCliente = $tiposCliente->listarTodos();
-                                            foreach ($todosTiposCliente as $tipo) {
-                                                ?>
-                                                <option <?php if($cliente['IdTipoCliente']==$tipo['IdTipo']){echo ' selected ';}; ?>
-                                                    value="<?php echo $tipo['IdTipo'] ?>"><?php echo $tipo['NombreTipo'] ?></option>
-                                                <?php
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-                                    <!-- /.form-group -->
-
-                                    <div class="form-group">
-                                        <label for="IdActividad">Actividad del cliente*</label>
-                                        <select class="form-control select2" name="IdActividad" id="IdActividad"
-                                                required tabindex="8">
-                                            <?php
-                                            require_once '../facades/ActividadesEmpresasFacade.php';
-                                            $actividadesCliente = new ActividadesEmpresasFacade();
-                                            $todasActividadesCliente = $actividadesCliente->listarTodos();
-                                            foreach ($todasActividadesCliente as $actividad) {
-                                                ?>
-                                                <option <?php if($cliente['IdActividadCliente']==$actividad['IdActividad']){echo ' selected ';}; ?>
-                                                    value="<?php echo $actividad['IdActividad'] ?>"><?php echo $actividad['NombreActividad'] ?></option>
-                                                <?php
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="IdClasificacion">Clasificación del cliente*(Sólo coordinador)</label>
-                                        <select class="form-control select2" name="IdClasificacion" id="IdClasificacion"
-                                                required tabindex="9">
-                                            <?php
-                                            require_once '../facades/ClasificacionesFacade.php';
-                                            $clasificacionCliente = new ClasificacionesFacade();
-                                            $todasClasificacionesCliente = $clasificacionCliente->listarTodos();
-                                            foreach ($todasClasificacionesCliente as $clasificacion) {
-                                                ?>
-                                                <option <?php if($cliente['IdClasificacionCliente']==$clasificacion['IdClasificacion']){echo ' selected ';}; ?>
-                                                    value="<?php echo $clasificacion['IdClasificacion'] ?>"><?php echo $clasificacion['NombreClasificacion'] ?></option>
-                                                <?php
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-                                    <!-- /.form-group -->
-                                </div>
+                        <div class="box box-default">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Información de la clasificación</h3>
                             </div>
-
-
-                            <div class="box box-default">
-                                <div class="box-header with-border">
-                                    <h3 class="box-title">Información personal registrada</h3>
+                            <!-- /.box-header -->
+                            <div class="box-body">
+                                <div class="form-group" id="unicoNit">
+                                    <label for="IdClasificacion" >Id. de la clasificación (Automático)</label>
+                                    <input type="text" name="IdClasificacion" id="IdClasificacion" class="form-control"
+                                           placeholder="Automático" readonly disabled/>
                                 </div>
-                                <!-- /.box-header -->
-                                <div class="box-body">
-
-                                    <div class="form-group">
-                                        <label for="Cedula">Cédula*</label>
-                                        <input type="text" name="Cedula" id="Cedula" class="form-control"
-                                               value="<?php echo $cliente['CedulaPersona']; ?>"
-                                               required tabindex="10"/>
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <label for="Nombres">Nombres*</label>
-                                        <input type="text" name="Nombres" id="Nombres" class="form-control"
-                                               value="<?php echo $cliente['Nombres']; ?>"
-                                               required tabindex="11"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="Apellidos">Apellidos*</label>
-                                        <input type="text" name="Apellidos" id="Apellidos" class="form-control"
-                                               value="<?php echo $cliente['Apellidos']; ?>" required tabindex="12"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="Celular">Celular*</label>
-                                        <input type="text" name="Celular" id="Celular" class="form-control"
-                                               value="<?php echo $cliente['CelularPersona']; ?>" required tabindex="13"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="Email1">Email*</label>
-                                        <input type="email" name="Email1" id="Email1" class="form-control"
-                                               value="<?php echo $cliente['EmailPersona']; ?>" required tabindex="14"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="EstadoPersona">Estado del cliente*(Sólo coordinador)</label>
-                                        <select class="form-control select2" name="EstadoPersona" id="EstadoPersona"
-                                                required tabindex="9">
-                                            <option <?php if($cliente['EstadoPersona']=='Activo'){echo ' selected ';}; ?>
-                                                value="Activo">Activo</option>
-                                            <option <?php if($cliente['EstadoPersona']=='Inactivo'){echo ' selected ';}; ?>
-                                                value="Activo">Inactivo</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>
-                                            <input class="minimal-red" type="checkbox" name="reestablecerContrasenia" id="reestablecerContrasenia">
-                                            Reestablecer la contraseña del usuario a su estado inicial
-                                            (número de cédula)
-                                        </label>
-                                    </div>
-                                    <div class="form-group" hidden>
-                                        <label>
-                                            <input type="hidden" name="Contrasenia" value="<?php echo $cliente['Contrasenia'] ?>">
-                                        </label>
-                                    </div>
-                                    <div class="box-footer">
-                                        <input type="button" class="btn btn-warning" tabindex="16"
-                                               onclick="location.href='buscarClientes.php'" value="Cancelar"/>
-                                        <button type="submit" class="btn btn-success pull-right" tabindex="15"
-                                                value="modificar" name="modificar" id="modificar">Modificar cliente
-                                        </button>
-                                    </div>
-                                    <!-- /.box-footer -->
+                                <div class="form-group">
+                                    <label for="NombreClasificacion">Nombre clasificación*</label>
+                                    <input type="text" name="NombreClasificacion" id="NombreClasificacion" class="form-control"
+                                           placeholder="Frecuente" required autofocus tabindex="1"/>
                                 </div>
-                                <!-- /.box-body -->
+                                <div class="box-footer">
+                                    <input type="button" class="btn btn-warning" tabindex="16"
+                                           onclick="location.href='buscarClasificaciones.php'" value="Cancelar"/>
+                                    <button type="submit" class="btn btn-success pull-right" tabindex="15"
+                                            value="guardar" name="guardar" id="guardar">Guardar información
+                                    </button>
+                                </div>
+                                <!-- /.form-group -->
                             </div>
-                        </form>
-                        <!-- /.box -->
-
-                    </div>
-
-                    <!--/.col (right) -->
+                        </div>
+                    </form>
+                    <!-- /.box -->
                 </div>
-                <!-- /.row -->
-            </section>
-            <!-- /.content -->
-        </div>
-        <!-- /.content-wrapper -->
+                <!--/.col (right) -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
 
-        <?php
-    };
-    ?>
 
     <!-- Main Footer -->
     <footer class="main-footer">
@@ -448,8 +280,8 @@ desired effect
     </footer>
 
     <!-- jQuery 2.1.4--
-    <script src="../../plugins/jQuery/jQuery-2.1.4.min.js" type="text/javascript"></script>
-    <!-- Bootstrap 3.3.2 JS -->
+   <script src="../../plugins/jQuery/jQuery-2.1.4.min.js" type="text/javascript"></script>
+   <!-- Bootstrap 3.3.2 JS -->
     <script src="../../bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- Select2 -->
     <script src="../../plugins/select2/select2.full.min.js" type="text/javascript"></script>
@@ -468,6 +300,27 @@ desired effect
       fixed layout. -->
     <script type="text/javascript">
         $(document).ready(function () {
+
+            $('#Nit').on('keyup', function () {
+                $.post("../controllers/ClientesController.php",
+                    {
+                        existeNit: $('#Nit').val()
+                    },
+                    function (data) {
+                        var json = $.parseJSON(data);
+                        if(json.existente==1){
+                            $("#Nit").removeClass("has-success").addClass("has-error").addClass("alert-danger");
+                            $(".form-control-feedback").removeClass("glyphicon-ok").addClass("glyphicon-remove");
+                            $("#guardar").addClass("disabled").addClass("hidden");
+                            $("#labelNit").text("Este nit ya existe. Por favor indique otro número*");
+                        }else if(json.existente==0){
+                            $("#Nit").addClass("has-success").removeClass("has-error").removeClass("alert-danger");
+                            $(".form-control-feedback").addClass("glyphicon-ok").removeClass("glyphicon-remove");
+                            $("#guardar").removeClass("disabled").removeClass("hidden");
+                            $("#labelNit").text("Nit*");
+                        }
+                    });
+            });
 
             function randomNumber(min, max) {
                 return Math.floor(Math.random() * (max - min + 1) + min);
@@ -600,8 +453,8 @@ desired effect
                             },
                             stringLength: {
                                 min: 3,
-                                max: 30,
-                                message: 'Este campo debe tener mínimo 3 caracteres y máximo 30'
+                                max: 50,
+                                message: 'Este campo debe tener mínimo 3 caracteres y máximo 50'
                             }
                         }
                     },
@@ -616,8 +469,8 @@ desired effect
                             },
                             stringLength: {
                                 min: 3,
-                                max: 30,
-                                message: 'Este campo debe tener mínimo 3 caracteres y máximo 30'
+                                max: 50,
+                                message: 'Este campo debe tener mínimo 3 caracteres y máximo 50'
                             }
                         }
                     },
@@ -667,7 +520,11 @@ desired effect
             //Date range picker
             $('#reservation').daterangepicker();
             //Date range picker with time picker
-            $('#reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
+            $('#reservationtime').daterangepicker({
+                timePicker: true,
+                timePickerIncrement: 30,
+                format: 'MM/DD/YYYY h:mm A'
+            });
             //Date range as a button
             $('#daterange-btn').daterangepicker(
                 {
@@ -681,9 +538,6 @@ desired effect
                     },
                     startDate: moment().subtract(29, 'days'),
                     endDate: moment()
-                },
-                function (start, end) {
-                    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
                 }
             );
 

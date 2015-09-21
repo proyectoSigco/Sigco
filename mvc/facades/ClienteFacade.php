@@ -1,6 +1,6 @@
 <?php
-include_once'../models/ClientesDao.php';
-include_once'../utilities/Conexion.php';
+include_once '../models/ClientesDao.php';
+include_once '../utilities/Conexion.php';
 class ClienteFacade{
     private $con;
     private $objDao;
@@ -22,8 +22,12 @@ class ClienteFacade{
         return $this->objDao->buscarCedulaPersona($cedulaPersona, $this->con);
     }
 
-    public function cambiarEstado($estado, $cedula){
+    /*public function cambiarEstado($estado, $cedula){
         return $this->objDao->cambiarEstado($estado, $cedula, $this->con);
+    }*/
+
+    public function cambiarEstado($cedula){
+        return $this->objDao->cambiarEstado($cedula, $this->con);
     }
 
     public function reestablecerContrasenia($idPersona){

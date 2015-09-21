@@ -13,7 +13,7 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
 <html>
 <head>
     <meta charset="UTF-8">
-    <title> Modificar cliente</title>
+    <title> Modificar lugar </title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
@@ -192,10 +192,10 @@ desired effect
     </aside>
 
     <?php
-    require_once '../facades/ClienteFacade.php';
-    if (isset($_GET['IdCliente'])) {
-        $clienteFac = new ClienteFacade();
-        $cliente = $clienteFac->obtenerCliente($_GET['IdCliente']);
+    require_once '../facades/LugaresFacade.php';
+    if (isset($_GET['IdLugar'])) {
+        $lugarFac = new LugaresFacade();
+        $lugar = $lugarFac->obtenerLugar($_GET['IdLugar']);
         ?>
 
         <!-- Content Wrapper. Contains page content -->
@@ -204,12 +204,12 @@ desired effect
             <section class="content-header">
                 <h1>
                     Formulario de modificación
-                    <small>Clientes</small>
+                    <small>Lugares</small>
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
-                    <li><a href="#">Clientes</a></li>
-                    <li class="active">Modificar cliente</li>
+                    <li><a href="#">Lugares</a></li>
+                    <li class="active">Modificar lugar</li>
                 </ol>
             </section>
 
@@ -220,21 +220,21 @@ desired effect
                     <!-- right column -->
                     <div class="col-md-10">
                         <form
-                            action="../controllers/ClientesController.php?controlar=modificar&IdCliente=<?php echo $_GET['IdCliente'].'&IdPersona='.$_GET['IdPersona'];?>"
-                            method="post" id="formValidacion">
+                            action="../controllers/LugaresController.php?controlar=modificar&IdLugar=<?php echo $_GET['IdLugar']; ?>"
+                            method="post" class="validacion" id="formValidacion">
 
                             <!-- general form elements disabled -->
                             <div class="box box-default">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title">Modificar cliente</h3>
+                                    <h3 class="box-title">Modificar lugar</h3>
                                 </div>
                                 <!-- /.box-header -->
                                 <div class="box-body">
                                     <!-- text input -->
                                     <div class="form-group">
                                         <p>
-                                            Por favor diligencie el siguiente formulario para actualizar la información
-                                            de un cliente.<br><br>
+                                            Por favor diligencie el siguiente formulario para modificar un
+                                            lugar.<br><br>
                                             Recuerde que este formulario contiene campos obligatorios(*).
                                         </p>
                                     </div>
@@ -243,201 +243,44 @@ desired effect
 
                             <div class="box box-default">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title">Información corporativa registrada</h3>
+                                    <h3 class="box-title">Información del lugar</h3>
                                 </div>
                                 <!-- /.box-header -->
                                 <div class="box-body">
-
                                     <div class="form-group">
-                                        <label for="Nit">NIT*</label>
-                                        <input type="text" name="Nit" id="Nit" class="form-control"
-                                               value="<?php echo $cliente['Nit']; ?>" autofocus required tabindex="1"/>
+                                        <label for="IdLugar">Id. del lugar (único)</label>
+                                        <input type="text" name="IdLugar" id="IdLugar" class="form-control"
+                                               value="<?php echo $lugar['IdLugar']; ?>" readonly/>
                                     </div>
                                     <div class="form-group">
-                                        <label for="RazonSocial">Razón social*</label>
-                                        <input type="text" name="RazonSocial" id="RazonSocial" class="form-control"
-                                               value="<?php echo $cliente['RazonSocial']; ?>" required tabindex="2"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="Direccion">Dirección*</label>
-                                        <input type="text" name="Direccion" id="Direccion" class="form-control"
-                                               value="<?php echo $cliente['Direccion']; ?>" required tabindex="3"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="Telefono">Teléfono principal*</label>
-                                        <input type="text" name="Telefono" id="Telefono" class="form-control"
-                                               value="<?php echo $cliente['Telefono']; ?>" required tabindex="4"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="Email2">Email corporativo*</label>
-                                        <input type="email" name="Email2" id="Email2" class="form-control"
-                                               value="<?php echo $cliente['EmailCliente']; ?>" required tabindex="5"/>
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <label for="IdLugar">Lugar*</label>
-                                        <select class="form-control select2" name="IdLugar" id="IdLugar" required
-                                                tabindex="6">
-                                            <?php
-                                            require_once '../facades/LugaresFacade.php';
-                                            $lugaresFac = new LugaresFacade();
-                                            $todasCiudades = $lugaresFac->listarTodos();
-                                            foreach ($todasCiudades as $ciudad) {
-                                                ?>
-                                                <option <?php if($cliente['IdLugarCliente']==$ciudad['IdLugar']){echo ' selected ';}; ?>
-                                                    value="<?php echo $ciudad['IdLugar'] ?>"><?php echo $ciudad['NombreLugar'] ?></option>
-                                                <?php
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <label for="IdTipo">Tipo de cliente*</label>
-                                        <select class="form-control select2" name="IdTipo" id="IdTipo" required
-                                                tabindex="7">
-                                            <?php
-                                            require_once '../facades/TiposEmpresasFacade.php';
-                                            $tiposCliente = new TiposEmpresasFacade();
-                                            $todosTiposCliente = $tiposCliente->listarTodos();
-                                            foreach ($todosTiposCliente as $tipo) {
-                                                ?>
-                                                <option <?php if($cliente['IdTipoCliente']==$tipo['IdTipo']){echo ' selected ';}; ?>
-                                                    value="<?php echo $tipo['IdTipo'] ?>"><?php echo $tipo['NombreTipo'] ?></option>
-                                                <?php
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-                                    <!-- /.form-group -->
-
-                                    <div class="form-group">
-                                        <label for="IdActividad">Actividad del cliente*</label>
-                                        <select class="form-control select2" name="IdActividad" id="IdActividad"
-                                                required tabindex="8">
-                                            <?php
-                                            require_once '../facades/ActividadesEmpresasFacade.php';
-                                            $actividadesCliente = new ActividadesEmpresasFacade();
-                                            $todasActividadesCliente = $actividadesCliente->listarTodos();
-                                            foreach ($todasActividadesCliente as $actividad) {
-                                                ?>
-                                                <option <?php if($cliente['IdActividadCliente']==$actividad['IdActividad']){echo ' selected ';}; ?>
-                                                    value="<?php echo $actividad['IdActividad'] ?>"><?php echo $actividad['NombreActividad'] ?></option>
-                                                <?php
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="IdClasificacion">Clasificación del cliente*(Sólo coordinador)</label>
-                                        <select class="form-control select2" name="IdClasificacion" id="IdClasificacion"
-                                                required tabindex="9">
-                                            <?php
-                                            require_once '../facades/ClasificacionesFacade.php';
-                                            $clasificacionCliente = new ClasificacionesFacade();
-                                            $todasClasificacionesCliente = $clasificacionCliente->listarTodos();
-                                            foreach ($todasClasificacionesCliente as $clasificacion) {
-                                                ?>
-                                                <option <?php if($cliente['IdClasificacionCliente']==$clasificacion['IdClasificacion']){echo ' selected ';}; ?>
-                                                    value="<?php echo $clasificacion['IdClasificacion'] ?>"><?php echo $clasificacion['NombreClasificacion'] ?></option>
-                                                <?php
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-                                    <!-- /.form-group -->
-                                </div>
-                            </div>
-
-
-                            <div class="box box-default">
-                                <div class="box-header with-border">
-                                    <h3 class="box-title">Información personal registrada</h3>
-                                </div>
-                                <!-- /.box-header -->
-                                <div class="box-body">
-
-                                    <div class="form-group">
-                                        <label for="Cedula">Cédula*</label>
-                                        <input type="text" name="Cedula" id="Cedula" class="form-control"
-                                               value="<?php echo $cliente['CedulaPersona']; ?>"
-                                               required tabindex="10"/>
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <label for="Nombres">Nombres*</label>
-                                        <input type="text" name="Nombres" id="Nombres" class="form-control"
-                                               value="<?php echo $cliente['Nombres']; ?>"
-                                               required tabindex="11"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="Apellidos">Apellidos*</label>
-                                        <input type="text" name="Apellidos" id="Apellidos" class="form-control"
-                                               value="<?php echo $cliente['Apellidos']; ?>" required tabindex="12"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="Celular">Celular*</label>
-                                        <input type="text" name="Celular" id="Celular" class="form-control"
-                                               value="<?php echo $cliente['CelularPersona']; ?>" required tabindex="13"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="Email1">Email*</label>
-                                        <input type="email" name="Email1" id="Email1" class="form-control"
-                                               value="<?php echo $cliente['EmailPersona']; ?>" required tabindex="14"/>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="EstadoPersona">Estado del cliente*(Sólo coordinador)</label>
-                                        <select class="form-control select2" name="EstadoPersona" id="EstadoPersona"
-                                                required tabindex="9">
-                                            <option <?php if($cliente['EstadoPersona']=='Activo'){echo ' selected ';}; ?>
-                                                value="Activo">Activo</option>
-                                            <option <?php if($cliente['EstadoPersona']=='Inactivo'){echo ' selected ';}; ?>
-                                                value="Activo">Inactivo</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label>
-                                            <input class="minimal-red" type="checkbox" name="reestablecerContrasenia" id="reestablecerContrasenia">
-                                            Reestablecer la contraseña del usuario a su estado inicial
-                                            (número de cédula)
-                                        </label>
-                                    </div>
-                                    <div class="form-group" hidden>
-                                        <label>
-                                            <input type="hidden" name="Contrasenia" value="<?php echo $cliente['Contrasenia'] ?>">
-                                        </label>
+                                        <label for="NombreLugar">Nombre del lugar*</label>
+                                        <input type="text" name="NombreLugar" id="NombreLugar" class="form-control"
+                                               value="<?php echo $lugar['NombreLugar']; ?>" autofocus required
+                                               tabindex="1"/>
                                     </div>
                                     <div class="box-footer">
                                         <input type="button" class="btn btn-warning" tabindex="16"
-                                               onclick="location.href='buscarClientes.php'" value="Cancelar"/>
+                                               onclick="location.href='buscarLugares.php'" value="Cancelar"/>
                                         <button type="submit" class="btn btn-success pull-right" tabindex="15"
-                                                value="modificar" name="modificar" id="modificar">Modificar cliente
+                                                value="modificar" name="modificar" id="modificar">Modificar información
                                         </button>
                                     </div>
-                                    <!-- /.box-footer -->
+                                    <!-- /.form-group -->
                                 </div>
-                                <!-- /.box-body -->
                             </div>
                         </form>
                         <!-- /.box -->
-
                     </div>
-
                     <!--/.col (right) -->
                 </div>
                 <!-- /.row -->
             </section>
             <!-- /.content -->
         </div>
-        <!-- /.content-wrapper -->
-
         <?php
-    };
+    }
     ?>
+    <!-- /.content-wrapper -->
 
     <!-- Main Footer -->
     <footer class="main-footer">

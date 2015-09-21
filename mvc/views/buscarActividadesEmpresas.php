@@ -10,10 +10,10 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
 }
 ?>
 
-<html xmlns="http://www.w3.org/1999/html">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Buscar Clientes</title>
+    <title>Buscar actividades</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
@@ -41,10 +41,6 @@ if ($_SESSION['datosLogin']==null || $_SESSION['datosLogin']['EstadoPersona']=="
     <script type="text/javascript" src="../../plugins/formvalidation/framework/bootstrap.js"></script>
     <script type="text/javascript" src="../../plugins/formvalidation/language/es_ES.js"></script>
 
-
-    <!-- sweet alert lucho-->
-    <link href="../../plugins/animate/animate.css" rel="stylesheet" type="text/css"/>
-    <script src="../../plugins/messajes/jquery.noty.packaged.min.js"></script>
 
 
     <link rel="stylesheet" href="../../date/jquery-ui.css">
@@ -198,12 +194,12 @@ desired effect
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Clientes
+                Actividades
                 <small>Buscar</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
-                <li>Clientes</li>
+                <li>Actividades</li>
                 <li class="active">Buscar</li>
             </ol>
         </section>
@@ -220,12 +216,12 @@ desired effect
                     if (isset($_GET['mensaje'])) {
                         ?>
                         <div class="alert
-                      <?php if ($_GET['error'] == 'true') {
+					  <?php if ($_GET['error'] == 'true') {
                             echo 'alert-error';
                         } else {
                             echo 'alert-success';
                         } ?>
-                      alert-dismissable">
+					  alert-dismissable">
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                             <h4><i class="fa fa-<?php if($_GET['error']=='true'){echo 'warning';}else{echo 'check';};?>">   </i>    Resultado del proceso:</h4>
                             <?php echo $mensaje = $_GET['mensaje'] ?>
@@ -265,11 +261,11 @@ desired effect
                     <!-- general form elements disabled -->
                     <div class="box">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Buscar clientes</h3>
+                            <h3 class="box-title">Buscar Actividades</h3>
                         </div><!-- /.box-header -->
                         <div class="box-body">
                             <p>
-                                Use las siguientes opciones para realizar la búsqueda de un cliente.
+                                Use las siguientes opciones para realizar la búsqueda de una actividad.
                                 Recuerde que en este formulario hay campos obligatorios(*).<br><br>
                             </p>
 
@@ -284,30 +280,24 @@ desired effect
                         <div class="box-body">
 
 
-                            <form role="form" action="../controllers/ClientesController.php?controlar=buscar" method="post">
+                            <form role="form" action="../controllers/ActividadesEmpresasController.php?controlar=buscar" method="post">
 
                                 <div class="form-group">
-                                    <label for="criterio">Seleccione un criterio de búsqueda*</label>
+                                    <label for="criterio">Seleccione un criterio de búsqueda</label>
                                     <select class="form-control select2" name="criterio" id="criterio" required tabindex="1" autofocus>
-                                        <option value="Personas.CedulaPersona"
-                                            <?php if(isset($_GET['criterio'])&&$_GET['criterio']=='Personas.CedulaPersona'){echo 'selected';} ?>
-                                            >Cédula Ciudadanía del cliente (Ej. 51125309)</option>
-                                        <option value="Personas.EstadoPersona"
-                                            <?php if(isset($_GET['criterio'])&&$_GET['criterio']=='Personas.EstadoPersona'){echo 'selected';} ?>
-                                            >Estado del cliente (Ej. Activo/Inactivo)</option>
-                                        <option value="Clientes.Nit"
-                                            <?php if(isset($_GET['criterio'])&&$_GET['criterio']=='Clientes.Nit'){echo 'selected';} ?>
-                                            >NIT del cliente (Ej. 917284)</option>
-                                        <option value="Clientes.RazonSocial"
-                                            <?php if(isset($_GET['criterio'])&&$_GET['criterio']=='Clientes.RazonSocial'){echo 'selected';} ?>
-                                            >Razón Social del cliente (Ej. Dui Incorporated)</option>
-                                        <option value="Lugares.NombreLugar"
-                                            <?php if(isset($_GET['criterio'])&&$_GET['criterio']=='Lugares.NombreLugar'){echo 'selected';} ?>
-                                            >Ubicación del cliente (Ej. Bogotá)</option>
+                                        <option value="actividadesempresas.IdActividad"
+                                            <?php if(isset($_GET['criterio'])&&$_GET['criterio']=='actividadesempresas.IdActividad'){echo 'selected';} ?>
+                                            >Id. de la actividad (Ej. 3)</option>
+                                        <option value="actividadesempresas.NombreActividad"
+                                            <?php if(isset($_GET['criterio'])&&$_GET['criterio']=='actividadesempresas.NombreActividad'){echo 'selected';} ?>
+                                            >Nombre de la actividad (Ej. Construcción)</option>
+                                        <option value="actividadesempresas.PagaIva"
+                                            <?php if(isset($_GET['criterio'])&&$_GET['criterio']=='actividadesempresas.PagaIva'){echo 'selected';} ?>
+                                            >¿Paga IVA? (Ej. Si/No)</option>
                                     </select>
                                 </div>
 
-                                <label for="comobuscar" >¿Cómo desea consultar? y ¿Qué desea encontrar?*</label>
+                                <label for="comobuscar" >¿Cómo desea consultar? y ¿Qué desea encontrar?</label>
                                 <div class="input-group input-group-sm margin">
                                     <div class="input-group-btn">
                                         <select name="comobuscar" id="comobuscar" class="btn btn-default dropdown-toggle" data-toggle="dropdown" tabindex="2">
@@ -317,13 +307,14 @@ desired effect
                                     </div><!-- /btn-group -->
                                     <input type="text" name="busqueda" class="form-control"
                                         <?php if(isset($_GET['busqueda'])){echo 'value="'.$_GET['busqueda'].'"';
-                                        }elseif(isset($_GET['todos'])&&$_GET['todos']=='todos'){echo 'placeholder="Número Nit | Razón Social | Lugar"';
-                                        }else{echo 'placeholder="Número Nit | Razón Social | Lugar"';}
+                                        }elseif(isset($_GET['todos'])&&$_GET['todos']=='todos')
+                                        {echo 'placeholder=" Número Id. de la actividad | Nombre de la actividad | Si/No"';
+                                        }else{echo 'placeholder=" Número Id. de la actividad | Nombre de la actividad | Si/No"';}
                                         ?>
                                            required tabindex="3">
-                    <span class="input-group-btn">
-                      <button class="btn btn-info btn-flat" type="submit" tabindex="4"><i class="fa fa-search">     </i>     Buscar clientes</button>
-                    </span>
+					<span class="input-group-btn">
+					  <button class="btn btn-info btn-flat" type="submit" tabindex="4"><i class="fa fa-search">     </i>     Buscar actividades</button>
+					</span>
                                 </div><!-- /input-group -->
 
                             </form>
@@ -375,15 +366,10 @@ desired effect
                                 <!-- /.box-header -->
                                 <div class="box-body">
                                     <dl class="dl-horizontal">
-                                        <dt><span class="label label-success">Activo</span>
-                                            <span class="label label-warning">Inactivo</span></dt>
-                                        <dd>Cambia el estado de un cliente.</dd>
-                                        <dt><i class="fa fa-search-plus"></i> </dt>
-                                        <dd>Muestra la información completa de un cliente.</dd>
                                         <dt><i class="fa fa-edit"></i></dt>
-                                        <dd>Permite editar la información de un cliente.</dd>
+                                        <dd>Permite editar la información.</dd>
                                         <dt><span class="label label-default">  <i class="fa fa-file-excel-o"></i>
-                                  Exportar consulta completa</span></dt>
+								  Exportar consulta completa</span></dt>
                                         <dd>Guardar la consulta con toda la información en formato XLS.</dd>
                                     </dl>
                                 </div>
@@ -405,14 +391,9 @@ desired effect
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                         <tr>
-                                            <th>#Nit</th>
-                                            <th>Razón social</th>
-                                            <th>#Fijo</th>
-                                            <th>Ubicación</th>
-                                            <th>Contacto</th>
-                                            <th>#Cédula</th>
-                                            <th>#Móvil</th>
-                                            <th>Estado</th>
+                                            <th>#Id. Actividad</th>
+                                            <th>Nombre de la actividad</th>
+                                            <th>¿Paga IVA?</th>
                                             <th>Acciones</th>
                                         </tr>
                                         </thead>
@@ -423,49 +404,21 @@ desired effect
                                         ?>
                                         <tr>
                                             <td>
-                                                <?php echo $respuesta['Nit']; ?>
+                                                <?php echo $respuesta['IdActividad']; ?>
                                             </td>
                                             <td>
-                                                <?php echo $respuesta['RazonSocial']; ?>
+                                                <?php echo $respuesta['NombreActividad']; ?>
                                             </td>
                                             <td>
-                                                <?php echo $respuesta['Telefono']; ?>
+                                                <span
+                                                    class="label label-<?php if($respuesta['PagaIva']=='Si'){echo'success';}else{echo'warning';}; ?>">
+                                                <?php echo $respuesta['PagaIva']; ?>
+                                                </span>
                                             </td>
                                             <td>
-                                                <?php echo $respuesta['NombreLugar']; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $respuesta['Contacto']; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $respuesta['CedulaPersona']; ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $respuesta['CelularPersona']; ?>
-                                            </td>
-                                            <td>
-
-                                                <button class="btn btn-xs <?php if($respuesta['EstadoPersona']=='Activo'){echo'btn-success';}else{echo'btn-warning';}; ?> cambiarEstado"
-                                                        value="<?php echo $respuesta['CedulaPersona'];?>" data-toggle="tooltip" title="Cambiar estado" >
-                                                    <?php echo($respuesta['EstadoPersona']); ?>
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-xs btn-info click" value="<?php echo $respuesta['IdCliente']; ?>">
-                                                    <i class="fa fa-search-plus" data-toggle="tooltip" title="Ver detalles"></i>
-                                                </button>
-                                                <a href="modificarCliente.php?IdPersona=<?php echo $respuesta['IdPersona'].'&IdCliente='.$respuesta['IdCliente']; ?>">
+                                                <a href="modificarActividadEmpresa.php?IdActividad=<?php echo $respuesta['IdActividad']; ?>">
                                                     <button class="btn btn-xs btn-warning">
                                                         <i class="fa fa-fw fa-edit" data-toggle="tooltip" title="Editar información"></i>
-                                                    </button>
-                                                </a>
-                                                <a href="nuevoClienteMismaPersona.php?cedulaPersona=<?php echo $respuesta['CedulaPersona']; ?>">
-                                                    <button class="btn btn-xs btn-success">
-                                                        <i class="fa fa-fw fa-user-plus" data-toggle="tooltip" title="Añadir empresa a este cliente"></i>
-                                                    </button>
-                                                </a>
-                                                    <button class="btn btn-xs bg-gray-active reestablecer" value="<?php echo $respuesta['IdPersona'];?>">
-                                                        <i class="fa fa-key" data-toggle="tooltip" title="Reestablecer contraseña"></i>
                                                     </button>
                                             </td>
                                             <?php
@@ -474,21 +427,16 @@ desired effect
                                         </tbody>
                                         <tfoot>
                                         <tr>
-                                            <th>#Nit</th>
-                                            <th>Razón social</th>
-                                            <th>#Fijo</th>
-                                            <th>Ubicación</th>
-                                            <th>Contacto</th>
-                                            <th>#Cédula</th>
-                                            <th>#Móvil</th>
-                                            <th>Estado</th>
+                                            <th>#Id. Actividad</th>
+                                            <th>Nombre de la actividad</th>
+                                            <th>¿Paga IVA?</th>
                                             <th>Acciones</th>
                                         </tr>
                                         </tfoot>
                                     </table>
                                 </div>
                                 <div class="box-footer">
-                                    <form role="form" action="../utilities/exportarClientes.php?busqueda=<?php
+                                    <form role="form" action="../utilities/exportarActividadesEmpresas.php?busqueda=<?php
                                     if(isset($_GET['busqueda'])){echo $_GET['busqueda'];}else{echo'todos';} ?>" method="post">
                                         <button type="submit" class="btn btn-default pull-right" tabindex="14"
                                                 value="exportar" name="exportar" id="todos"><i class="fa fa-file-excel-o"></i>  Exportar consulta completa
@@ -513,7 +461,7 @@ desired effect
                                 </p>
                             </div>
                             <div class="box-footer">
-                                <form action="../controllers/ClientesController.php?controlar=todos" method="post">
+                                <form action="../controllers/ActividadesEmpresasController.php?controlar=todos" method="post">
                                     <button type="submit" class="btn btn-success pull-right" tabindex="14"
                                         > <i class="fa fa-plus-square-o"> </i>   Ver todos
                                     </button>
@@ -527,66 +475,6 @@ desired effect
             </div>   <!-- /.row -->
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
-
-    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="verDetalle">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content" style="border-radius: 5px">
-                <div class="modal-header" style="background: #00c0ef; color: #fff; border-radius: 5px 5px 0 0">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true">×</span></button>
-                    <h4 class="modal-title">Detalle del cliente</h4>
-                </div>
-                <div class="modal-body">
-
-
-                    <!-- info row -->
-                    <div class="row invoice-info">
-                        <div class="col-sm-5 invoice-col">
-
-                            <dl class="dl-horizontal">
-                                <dt>Razón social</dt>
-                                <dd id="razonsocial1"></dd>
-                                <dt>Nit</dt>
-                                <dd id="nit1"></dd>
-                                <dt>Dirección</dt>
-                                <dd id="direccion1"></dd>
-                                <dt>Ubicación</dt>
-                                <dd id="lugar1"></dd>
-                                <dt>Teléfono corporativo</dt>
-                                <dd id="telefono1"></dd>
-                                <dt>Email corporativo</dt>
-                                <dd id="email1"></dd>
-                                <dt>Tipo de empresa</dt>
-                                <dd id="tipo1"></dd>
-                                <dt>Actividad económica</dt>
-                                <dd id="actividad1"></dd>
-                                <dt>Clasificación del cliente</dt>
-                                <dd id="clasificacion1"></dd>
-                            </dl>
-                        </div><!-- /.col -->
-                        <div class="col-sm-6 invoice-col">
-
-                            <dl class="dl-horizontal">
-                                <dt>Nombres</dt>
-                                <dd id="nombres1"></dd>
-                                <dt>Apellidos</dt>
-                                <dd id="apellidos1"></dd>
-                                <dt>Cédula</dt>
-                                <dd id="cedula1"></dd>
-                                <dt>Email</dt>
-                                <dd id="email2"></dd>
-                                <dt>Celular</dt>
-                                <dd id="celular1"></dd>
-                                <dt>Estado</dt>
-                                <dd id="estado1"></dd>
-                            </dl>
-                        </div><!-- /.col -->
-
-                    </div><!-- /.row -->
-
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
 
 
     <!-- Main Footer -->
@@ -617,80 +505,7 @@ desired effect
       Both of these plugins are recommended to enhance the
       user experience. Slimscroll is required when using the
       fixed layout. -->
-
-<script>
-    $(".reestablecer").click(function () {
-        var btnId=$(this).attr("value");
-        var n = noty({
-            text: '¿Desea reestablecer la contraseña para éste cliente?',
-            theme: 'relax',
-            layout: 'center',
-            closeWith: ['click', 'hover'],
-            buttons: [
-                {
-                    addClass: 'btn btn-primary', text: 'Reestablecer', onClick: function ($noty) {
-                    $.post("../controllers/ClientesController.php",
-                        {
-                            reestablecerContrasenia: btnId
-                        },
-                        function (data) {
-                            //location.reload();
-                            noty({text: data, type: 'success'});
-                            $noty.close();
-                        });
-                }
-                },
-                {
-                    addClass: 'btn btn-danger', text: 'Cancelar', onClick: function ($noty) {
-                    $noty.close();
-                }
-                }
-            ],
-            type: 'confirm',
-            animation: {
-                open: 'animated wobble', // Animate.css class names
-                close: 'animated flipOutX' // Animate.css class names
-            }
-        });
-    });
-
-    $(".cambiarEstado").click(function () {
-        var cambEst=$(this).attr("value");
-        var n = noty({
-            text: '¿Desea cambiar el estado de éste cliente?',
-            theme: 'relax',
-            layout: 'center',
-            closeWith: ['click', 'hover'],
-            buttons: [
-                {
-                    addClass: 'btn btn-primary', text: 'Cambiar estado', onClick: function ($noty) {
-                    $.post("../controllers/ClientesController.php",
-                        {
-                            cambiarEstado: cambEst
-                        },
-                        function (data) {
-                            location.href='buscarClientes.php?mensaje=Se ha cambiado el estado del usuario de forma correcta.&error=false';
-                            noty({text: data, type: 'success'});
-                            $noty.close();
-                        });
-                }
-                },
-                {
-                    addClass: 'btn btn-danger', text: 'Cancelar', onClick: function ($noty) {
-                    $noty.close();
-                }
-                }
-            ],
-            type: 'confirm',
-            animation: {
-                open: 'animated wobble', // Animate.css class names
-                close: 'animated flipOutX' // Animate.css class names
-            }
-        });
-    });
-
-
-</script>
+</body>
 
 <script type="text/javascript">
     $(document).ready(function() {
@@ -728,7 +543,8 @@ desired effect
                             message: 'Este campo es requerido'
                         }
                     }
-                }
+                },
+
 
             }
         });
@@ -781,6 +597,9 @@ desired effect
     });
 </script>
 
+
+
+
 <script>
     function confirmar() {
         if (confirm('¿Está seguro que desea cambiar el estado de este cliente?')) {
@@ -799,5 +618,5 @@ desired effect
     }
 </script>
 
-</body>
+
 </html>

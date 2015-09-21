@@ -35,15 +35,13 @@ class ClientesDao
             $query->bindParam(7, $clienteDto->getIdActividad());
             $query->bindParam(8, $clienteDto->getIdLugar());
             $query->bindParam(9, $clienteDto->getCedula());
+
             $query->execute();
 
-            $query3=$cnn->prepare("Insert into RolesUsuarios VALUES (1,?)");
-            $query3->bindParam(1,$clienteDto->getCedula());
-            $query3->execute();
+            $query = $cnn->prepare("INSERT INTO rolesusuarios VALUES ('1', ?)");
+            $query->bindParam(1, $clienteDto->getCedula());
+            $query->execute();
 
-            $query4=$cnn->prepare("Insert into Empleados VALUES (DEFAULT,?,'Cliente')");
-            $query4->bindParam(1,$clienteDto->getCedula());
-            $query4->execute();
             $mensaje="Cliente registrado con éxito en la base de datos.&error=0";
 
         } catch (Exception $ex){
@@ -101,7 +99,6 @@ class ClientesDao
     }
 
     public function listarTodos(PDO $cnn){
-        //$cnn = Conexion::getConexion();
         try{
             $listarClientes = 'SELECT Personas.*, Clientes.*, Lugares.NombreLugar,
                                 concat(Personas.Nombres," ",Personas.Apellidos) as Contacto,
@@ -114,6 +111,7 @@ class ClientesDao
                                 ORDER BY `Clientes`.`Nit` ASC';
             $query = $cnn->prepare($listarClientes);
             $query->execute();
+            unset($_SESSION['conteo']);
             $_SESSION['conteo'] = $query->rowCount();
             return $query->fetchAll();
 
@@ -181,7 +179,6 @@ class ClientesDao
 
             $query->execute();
             $_SESSION['conteo'] = $query->rowCount();
-            $conteo = $query->rowCount();
             return $query->fetch();
         } catch (Exception $ex){
             echo '&detalleerror='.$ex->getMessage().'&encontrados=false&error=true';
@@ -288,7 +285,7 @@ class ClientesDao
         return $mensaje;
     }
 
-    public function cambiarEstado($estado, $cedula, PDO $cnn){
+    /*public function cambiarEstado($estado, $cedula, PDO $cnn){
         $mensaje = "";
         if($estado=='Activo'){
             $estado='Inactivo';
@@ -311,6 +308,32 @@ class ClientesDao
 
         $cnn = null;
         return $mensaje;
+    }*/
+
+    public function cambiarEstado($cedula, PDO $cnn){
+        $mensaje = "";
+        try{
+            $query = $cnn->prepare("select Personas.EstadoPersona from Personas WHERE Personas.CedulaPersona = ?");
+            $query->bindParam(1, $cedula);
+            $query->execute();
+            $estado=$query->fetch();
+            if($estado['EstadoPersona']=='Activo'){
+                echo 'leido como activo';
+                $query = $cnn->prepare("UPDATE Personas SET Personas.EstadoPersona = 'Inactivo' WHERE Personas.CedulaPersona = ?");
+                $query->bindParam(1, $cedula);
+                $query->execute();
+            }elseif($estado['EstadoPersona']=='Inactivo'){
+                echo 'leido como inactivo';
+                $query = $cnn->prepare("UPDATE Personas SET Personas.EstadoPersona = 'Activo' WHERE Personas.CedulaPersona = ?");
+                $query->bindParam(1, $cedula);
+                $query->execute();
+            }else{echo'No envió el valor correcto de la cédula';};
+            $mensaje="Cliente actualizado con éxito en la base de datos. Por favor actualice la página.";
+        } catch (Exception $ex){
+            $mensaje = '&detalleerror='.$ex->getMessage().'&error=true&mensaje=El cliente NO ha sido actualizado en la base de datos.';
+        }
+        $cnn = null;
+        return $mensaje;
     }
 
     public function reestablecerContrasenia($idPersona, PDO $cnn){
@@ -321,8 +344,9 @@ class ClientesDao
             $query->bindParam(1, $idPersona);
 
             $query->execute();
-            $mensaje="Se ha reestablecido la contraseña del cliente a su estado inicial (documento/cédula).&error=false";
+            $mensaje="Se ha reestablecido la contrase&ntilde;a del cliente a su estado inicial (c&eacute;dula)";
 
+            //$mensaje=header("Location: ../views/buscarClientes.php?mensaje=Se ha reestablecido la contraseña del cliente a su estado inicial (cédula).&error=false");
         } catch (Exception $ex){
             $mensaje = '&detalleerror='.$ex->getMessage().'&error=true&mensaje=El cliente NO ha sido actualizado en la base de datos.';
         }
@@ -337,13 +361,7 @@ class ClientesDao
             $query = $cnn->prepare("SELECT COUNT(*) as existente from clientes where clientes.Nit = ?");
             $query->bindParam(1, $nit);
             $query->execute();
-            if($query==1){
-                $mensaje = true;
-            }elseif ($query==0){
-                $mensaje = false;
-            }else{
-                $mensaje = 'Error en la consulta';
-            }
+            $mensaje = $query->fetch();
             return $mensaje;
         }catch (Exception $ex){
             $mensaje = '&detalleerror='.$ex->getMessage().'$error=true&mensaje=Error en la consulta';
